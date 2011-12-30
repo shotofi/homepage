@@ -5,7 +5,8 @@ a { color: #0080C0;}
 h1 { font-size: 18px; font-weight: bold; padding-top: 10px; padding-bottom: 5px;}
 h2 { font-size: 14px; font-weight: bold; padding-top: 5px; padding-bottom: 5px;}
 
-p {padding-top: 5px; padding-bottom: 5px; }
+li, dl, dt { font-size: 13px;}
+p {padding-top: 5px; padding-bottom: 5px; font-size: 13px;}
 
 .header .top { height: 95px;}
 .header .language { color: #fff; background: #000; float: right; width: 250px; margin-top: 30px; padding: 3px 3px;}
@@ -24,17 +25,20 @@ p {padding-top: 5px; padding-bottom: 5px; }
 .column-center { width: 60%; }
 .column-right { width: 20%; }
 .column-full { width: 100%; }
+.column-center-right { width: 80%; }
 
+.footer { margin-top: 20px;}
 .footer .updated { float: right; padding: 0;}
 .footer .updated:after {content: "";}
 
 .calendar {color: #000; padding: 10px;}
 .calendar h1 { background: #E7E7ED; font-weight: bold; text-align: center; padding: 3px 0 3px 0; font-size: 12px;}
-.calendar li { margin-top: 10px; background: #E7E7ED; padding: 3px 0 3px 0;}
+.calendar li { margin-top: 10px; background: #E7E7ED; padding: 3px 0 3px 0; font-size: 12px;}
 .calendar .date { width: 80px; display: inline-block;}
 
-.info-block { padding: 20px; clear: left;}
+.info-block { padding: 20px; clear: left; }
 .info-block h1 { background: #E7E7ED; color: #0080C0; font-weight: bold; text-align: center; padding: 3px 0 3px 0; font-size: 12px;}
+.info-block p { font-size: 12px;}
 .info-block ul { margin: 10px 0 10px 15px;}
 .info-block li { list-style: disc inside;}
 .info-block a.more {float: right;}
@@ -46,3 +50,13 @@ p {padding-top: 5px; padding-bottom: 5px; }
 .harjoitukset ul { margin: 0 0 35px 35px;}
 .harjoitukset p { margin-bottom: 40px;}
 .harjoitukset li { list-style: disc outside;}
+
+.course-schedule h1 { background: #E7E7ED; font-weight: bold; text-align: center; padding: 3px 0 3px 0; font-size: 12px; }
+.course-schedule table {background: #E7E7ED; margin-top: 20px; width: 100%; }
+.course-schedule table td {vertical-align: top; font-size: 12px;}
+
+
+.alkeiskurssi h1 { margin-left: 20px;}
+.alkeiskurssi dl { margin: 20px 0 0 20px;}
+.alkeiskurssi dd { margin-left: 40px;}
+

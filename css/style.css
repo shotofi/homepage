@@ -2,6 +2,9 @@
 body { font: normal 0.75em/1.5em Verdana, Arial, Helvetica, sans-serif; color: #000; background: #fff; width: 98%; height: 100%; padding: 20px; }
 a { color: #0080C0;}
 
+h1 { font-size: 18px; font-weight: bold; padding-top: 10px; padding-bottom: 5px;}
+p {padding-top: 5px; padding-bottom: 5px; }
+
 .header .top { height: 95px;}
 .header .language { color: #fff; background: #000; float: right; width: 250px; margin-top: 30px; padding: 3px 3px;}
 .header .language a { color: #fff; float: right; }
@@ -19,9 +22,19 @@ a { color: #0080C0;}
 .column-center { width: 60%; }
 .column-right { width: 20%; }
 
+.footer .updated { float: right; padding: 0;}
+.footer .updated:after {content: "";}
 
 .calendar {color: #000; padding: 10px;}
-.calendar h1 { background: #E7E7ED; font-weight: bold; text-align: center; padding: 3px 0 3px 0;}
-.calendar ul { margin-top: 10px;}
-.calendar li { background: #E7E7ED; padding: 3px 0 3px 0;}
+.calendar h1 { background: #E7E7ED; font-weight: bold; text-align: center; padding: 3px 0 3px 0; font-size: 12px;}
+.calendar li { margin-top: 10px; background: #E7E7ED; padding: 3px 0 3px 0;}
 .calendar .date { width: 80px; display: inline-block;}
+
+.info-block { padding: 20px; clear: left;}
+.info-block h1 { background: #E7E7ED; color: #0080C0; font-weight: bold; text-align: center; padding: 3px 0 3px 0; font-size: 12px;}
+.info-block ul { margin: 10px 0 10px 15px;}
+.info-block li { list-style: disc inside;}
+.info-block a.more {float: right;}
+
+.facebook { text-align: center;}
+

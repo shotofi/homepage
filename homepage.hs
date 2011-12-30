@@ -9,18 +9,10 @@ main = hakyll $ do
         route   idRoute
         compile copyFileCompiler
 
-    match "gallery/*" $ do
+    match "gallery/**" $ do
         route   idRoute
         compile copyFileCompiler
-
-    match "gallery/thumbs/*" $ do
-        route   idRoute
-        compile copyFileCompiler
-
-    match "gallery/videos/*" $ do
-        route   idRoute
-        compile copyFileCompiler
-
+ 
     match "css/*" $ do
         route   idRoute
         compile compressCssCompiler
@@ -33,7 +25,8 @@ main = hakyll $ do
 
     match (list ["main.html", "harjoitukset.html", "alkeiskurssi.html", "leirit.html", 
             "yleistietoa.html", "muistoja.html", "tyylikuvaus.html", "katat.html", 
-            "muumaailma.html", "kds_saannot.html", "karate_all.html"]) $ do
+            "muumaailma.html", "kds_saannot.html", "karate_all.html", 
+            "kuvia_09.html", "kuvia_08.html", "kuvia_07.html"]) $ do
         route   $ setExtension "html"
         compile $ readPageCompiler
             >>> applyTemplateCompiler "templates/template.html"

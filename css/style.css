@@ -65,5 +65,11 @@ p {padding-top: 5px; padding-bottom: 5px; font-size: 13px;}
 .yleistietoa h1, .yleistietoa h2, .yleistietoa p, .yleistietoa ul  { margin-left: 20px;}
 .yleistietoa .anchor {font-size: 18px; font-weight: bold; padding-top: 10px; padding-bottom: 5px; color: #000; margin: 20px 0 20px 20px; display: inline-block;}
 
+.muistoja h1, .muistoja h2, .muistoja p { margin-left: 20px;}
 
+.galleries h1 { background: #E7E7ED; font-weight: bold; text-align: center; padding: 3px 0 3px 0; font-size: 12px; }
+.galleries table {background: #E7E7ED; margin-top: 20px; width: 100%; }
+.galleries table td {vertical-align: top; font-size: 10px; padding-top: 10px;}
+.galleries .title { width: 100px; padding-right: 10px;}
+.galleries img { max-width: 80px; }
 

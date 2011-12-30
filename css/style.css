@@ -3,6 +3,8 @@ body { font: normal 0.75em/1.5em Verdana, Arial, Helvetica, sans-serif; color: #
 a { color: #0080C0;}
 
 h1 { font-size: 18px; font-weight: bold; padding-top: 10px; padding-bottom: 5px;}
+h2 { font-size: 14px; font-weight: bold; padding-top: 5px; padding-bottom: 5px;}
+
 p {padding-top: 5px; padding-bottom: 5px; }
 
 .header .top { height: 95px;}
@@ -11,7 +13,7 @@ p {padding-top: 5px; padding-bottom: 5px; }
 .header img { width: 305px; height: 94px; float: left;}
 .header nav { clear: left;}
 
-.tabs { background: #0080C0; list-style: none; color: white; margin: 5px 0 5px 0;}
+.tabs { background: #0080C0; list-style: none; color: white; margin: 5px 0 15px 0;}
 .tabs a { color: white; font-weight: bold;}
 .tabs li { display: inline; padding: 5px; line-height: 20px;}
 .tabs li:after {content: "|"; padding-left: 15px;}
@@ -21,6 +23,7 @@ p {padding-top: 5px; padding-bottom: 5px; }
 .column-left { width: 20%; }
 .column-center { width: 60%; }
 .column-right { width: 20%; }
+.column-full { width: 100%; }
 
 .footer .updated { float: right; padding: 0;}
 .footer .updated:after {content: "";}
@@ -38,3 +41,8 @@ p {padding-top: 5px; padding-bottom: 5px; }
 
 .facebook { text-align: center;}
 
+.harjoitukset h2 { margin-top: 30px;}
+.harjoitukset b { margin: 25px 0 0 35px; display: block;}
+.harjoitukset ul { margin: 0 0 35px 35px;}
+.harjoitukset p { margin-bottom: 40px;}
+.harjoitukset li { list-style: disc outside;}

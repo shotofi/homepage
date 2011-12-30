@@ -54,10 +54,16 @@ p {padding-top: 5px; padding-bottom: 5px; font-size: 13px;}
 .schedule h1 { background: #E7E7ED; font-weight: bold; text-align: center; padding: 3px 0 3px 0; font-size: 12px; }
 .schedule table {background: #E7E7ED; margin-top: 20px; width: 100%; }
 .schedule table td {vertical-align: top; font-size: 12px;}
+.schedule .links a {background: #E7E7ED; font-weight: bold; text-align: center; padding: 3px 0 3px 0; font-size: 12px; width: 100%; display: inline-block; margin-top: 20px; }
 
 .alkeiskurssi h1, .alkeiskurssi p { margin-left: 20px;}
 .alkeiskurssi dl { margin: 20px 0 0 20px;}
 .alkeiskurssi dd { margin-left: 40px;}
 
 .leirit h1, .leirit p { margin-left: 20px;}
+
+.yleistietoa h1, .yleistietoa h2, .yleistietoa p, .yleistietoa ul  { margin-left: 20px;}
+.yleistietoa .anchor {font-size: 18px; font-weight: bold; padding-top: 10px; padding-bottom: 5px; color: #000; margin: 20px 0 20px 20px; display: inline-block;}
+
+
 

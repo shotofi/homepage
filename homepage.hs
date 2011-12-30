@@ -25,6 +25,10 @@ main = hakyll $ do
         route   idRoute
         compile compressCssCompiler
 
+    match "pdf/*" $ do
+        route   idRoute
+        compile copyFileCompiler
+
     match "templates/*" $ compile templateCompiler
 
     match (list ["main.html", "harjoitukset.html", "alkeiskurssi.html", "leirit.html", 

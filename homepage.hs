@@ -15,8 +15,8 @@ main = hakyll $ do
 
     match "templates/*" $ compile templateCompiler
 
-    match (list ["main.markdown"]) $ do
+    match (list ["main.html"]) $ do
         route   $ setExtension "html"
-        compile $ pageCompiler
+        compile $ readPageCompiler
             >>> applyTemplateCompiler "templates/template.html"
             >>> relativizeUrlsCompiler

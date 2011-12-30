@@ -73,3 +73,8 @@ p {padding-top: 5px; padding-bottom: 5px; font-size: 13px;}
 .galleries .title { width: 100px; padding-right: 10px;}
 .galleries img { max-width: 80px; }
 
+.tyylikuvaus hr { margin-top: 20px; margin-bottom: 20px;}
+.tyylikuvaus .anchor {font-size: 18px; font-weight: bold; padding-top: 15px; padding-bottom: 15px; color: #000; display: inline-block;}
+.tyylikuvaus .anchor-small {font-size: 13px; font-weight: bold; padding-top: 5px; padding-bottom: 5px; color: #000;}
+.tyylikuvaus ul { margin-left: 30px;}
+.tyylikuvaus li { list-style: disc outside; }

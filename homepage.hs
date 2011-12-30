@@ -27,7 +27,7 @@ main = hakyll $ do
             "yleistietoa.html", "muistoja.html", "tyylikuvaus.html", "katat.html", 
             "muumaailma.html", "kds_saannot.html", "karate_all.html", 
             "kuvia_09.html", "kuvia_08.html", "kuvia_07.html", "kuvat1.html", 
-            "kuvat2.html", "kuvat3.html"]) $ do
+            "kuvat2.html", "kuvat3.html", "kuvat4.html"]) $ do
         route   $ setExtension "html"
         compile $ readPageCompiler
             >>> applyTemplateCompiler "templates/template.html"

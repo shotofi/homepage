@@ -1,0 +1,27 @@
+
+body { font: normal 0.75em/1.5em Verdana, Arial, Helvetica, sans-serif; color: #000; background: #fff; width: 98%; height: 100%; padding: 20px; }
+a { color: #0080C0;}
+
+.header .top { height: 95px;}
+.header .language { color: #fff; background: #000; float: right; width: 250px; margin-top: 30px; padding: 3px 3px;}
+.header .language a { color: #fff; float: right; }
+.header img { width: 305px; height: 94px; float: left;}
+.header nav { clear: left;}
+
+.tabs { background: #0080C0; list-style: none; color: white; margin: 5px 0 5px 0;}
+.tabs a { color: white; font-weight: bold;}
+.tabs li { display: inline; padding: 5px; line-height: 20px;}
+.tabs li:after {content: "|"; padding-left: 15px;}
+
+.content { overflow: auto;}
+.column { float: left; }
+.column-left { width: 20%; }
+.column-center { width: 60%; }
+.column-right { width: 20%; }
+
+
+.calendar {color: #000; padding: 10px;}
+.calendar h1 { background: #E7E7ED; font-weight: bold; text-align: center; padding: 3px 0 3px 0;}
+.calendar ul { margin-top: 10px;}
+.calendar li { background: #E7E7ED; padding: 3px 0 3px 0;}
+.calendar .date { width: 80px; display: inline-block;}

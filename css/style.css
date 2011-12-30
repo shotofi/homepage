@@ -2,8 +2,8 @@
 body { font: normal 0.75em/1.5em Verdana, Arial, Helvetica, sans-serif; color: #000; background: #fff; width: 98%; height: 100%; padding: 20px; }
 a { color: #0080C0;}
 
-h1 { font-size: 18px; font-weight: bold; padding-top: 10px; padding-bottom: 5px;}
-h2 { font-size: 14px; font-weight: bold; padding-top: 5px; padding-bottom: 5px;}
+h1 { font-size: 18px; font-weight: bold; padding-top: 15px; padding-bottom: 5px;}
+h2 { font-size: 14px; font-weight: bold; padding-top: 10px; padding-bottom: 5px;}
 
 li, dl, dt { font-size: 13px;}
 p {padding-top: 5px; padding-bottom: 5px; font-size: 13px;}
@@ -80,4 +80,7 @@ p {padding-top: 5px; padding-bottom: 5px; font-size: 13px;}
 .tyylikuvaus li { list-style: disc outside; }
 
 .katat h1, .katat p { margin-left: 20px;}
+
+.muumaailma ul { margin-left: 30px;}
+.muumaailma li { list-style: disc outside; }
 

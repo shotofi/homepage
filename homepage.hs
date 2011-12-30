@@ -28,7 +28,8 @@ main = hakyll $ do
     match "templates/*" $ compile templateCompiler
 
     match (list ["main.html", "harjoitukset.html", "alkeiskurssi.html", "leirit.html", 
-            "yleistietoa.html", "muistoja.html", "tyylikuvaus.html", "katat.html"]) $ do
+            "yleistietoa.html", "muistoja.html", "tyylikuvaus.html", "katat.html", 
+            "muumaailma.html"]) $ do
         route   $ setExtension "html"
         compile $ readPageCompiler
             >>> applyTemplateCompiler "templates/template.html"

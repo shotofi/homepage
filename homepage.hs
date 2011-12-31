@@ -43,3 +43,23 @@ main = hakyll $ do
             >>> applyTemplateCompiler "templates/gallery.html"
             >>> applyTemplateCompiler "templates/template.html"
             >>> relativizeUrlsCompiler
+
+
+    -- ENGLISH VERSION
+    match (list ["english.html", "harjoitukset_en.html", "alkeiskurssi_en.html", "leirit_en.html", 
+            "yleistietoa_en.html","tyylikuvaus_en.html", "katat_en.html", "muutokset_en.html",
+            "muumaailma_en.html", "kds_saannot_en.html", "karate_all_en.html",
+            "yhteystiedot_en.html"]) $ do
+        route   $ setExtension "html"
+        compile $ readPageCompiler
+            >>> applyTemplateCompiler "templates/template_en.html"
+            >>> relativizeUrlsCompiler
+
+    match (list ["muistoja_en.html", "kuvia_09_en.html", "kuvia_08_en.html", "kuvia_07_en.html", "kuvat1_en.html",
+            "kuvat2_en.html", "kuvat3_en.html", "kuvat4_en.html", "kuvat5_en.html", 
+            "kuvat6_en.html", "kuvat7_en.html", "kuvat8_en.html", "kuvat9_en.html", "kuvat10_en.html"]) $ do
+        route   $ setExtension "html"
+        compile $ readPageCompiler
+            >>> applyTemplateCompiler "templates/gallery_en.html"
+            >>> applyTemplateCompiler "templates/template_en.html"
+            >>> relativizeUrlsCompiler    

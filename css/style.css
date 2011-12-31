@@ -64,6 +64,7 @@ p {padding-top: 5px; padding-bottom: 5px; font-size: 13px;}
 
 .yleistietoa h1, .yleistietoa h2, .yleistietoa p, .yleistietoa ul  { margin-left: 20px;}
 .yleistietoa .anchor {font-size: 18px; font-weight: bold; padding-top: 10px; padding-bottom: 5px; color: #000; margin: 20px 0 20px 20px; display: inline-block;}
+.yleistietoa li { list-style: disc outside; margin-left: 30px;}
 
 .muistoja h1, .muistoja h2, .muistoja p, .muistoja img { margin-left: 20px;}
 

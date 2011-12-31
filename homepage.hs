@@ -27,7 +27,7 @@ main = hakyll $ do
     match (list ["main.html", "harjoitukset.html", "alkeiskurssi.html", "leirit.html", 
             "yleistietoa.html","tyylikuvaus.html", "katat.html", "muutokset.html",
             "muumaailma.html", "kds_saannot.html", "karate_all.html",
-            "yhteystiedot.html"]) $ do
+            "yhteystiedot.html", "lajinvalinta.html", "muiden_harrastajat.html"]) $ do
         route   $ setExtension "html"
         compile $ readPageCompiler
             >>> applyTemplateCompiler "templates/template.html"
@@ -48,8 +48,8 @@ main = hakyll $ do
     -- ENGLISH VERSION
     match (list ["english.html", "harjoitukset_en.html", "alkeiskurssi_en.html", "leirit_en.html", 
             "yleistietoa_en.html","tyylikuvaus_en.html", "katat_en.html", "muutokset_en.html",
-            "muumaailma_en.html", "kds_saannot_en.html", "karate_all_en.html",
-            "yhteystiedot_en.html"]) $ do
+            "muumaailma_en.html", "karate_all_en.html",
+            "yhteystiedot_en.html", "lajinvalinta_en.html", "muiden_harrastajat_en.html"]) $ do
         route   $ setExtension "html"
         compile $ readPageCompiler
             >>> applyTemplateCompiler "templates/template_en.html"

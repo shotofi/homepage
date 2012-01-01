@@ -3,4 +3,5 @@ _site/
 homepage
 homepage.hi
 homepage.o
-
+.idea/misc.xml
+.idea/workspace.xml

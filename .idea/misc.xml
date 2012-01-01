@@ -39,6 +39,9 @@
     <breakpoint_rules />
     <ui_properties />
   </component>
+  <component name="EntryPointsManager">
+    <entry_points version="2.0" />
+  </component>
   <component name="IdProvider" IDEtalkID="E01590348A7219B63F91827A0942ED73" />
   <component name="JavadocGenerationManager">
     <option name="OUTPUT_DIRECTORY" />

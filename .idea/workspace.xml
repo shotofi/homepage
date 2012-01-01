@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="3" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="2b96aabd-5f0d-4001-9c24-41c7d2c310ea" name="Default" comment="" />
     <ignored path="homepage.iws" />
@@ -61,7 +64,7 @@
       <file leaf-file-name="alkeiskurssi.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/alkeiskurssi.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="24" selection-start="543" selection-end="543" vertical-scroll-proportion="-8.125">
+            <state line="25" column="24" selection-start="543" selection-end="543" vertical-scroll-proportion="-15.625">
               <folding />
             </state>
           </provider>
@@ -76,10 +79,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="kuvat1_en.html" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="kuvat1_en.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/kuvat1_en.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="0" selection-start="670" selection-end="670" vertical-scroll-proportion="0.5025773">
+            <state line="26" column="0" selection-start="670" selection-end="670" vertical-scroll-proportion="-16.25">
               <folding />
             </state>
           </provider>
@@ -89,6 +92,60 @@
         <entry file="file://$PROJECT_DIR$/kuvat1.html">
           <provider selected="true" editor-type-id="text-editor">
             <state line="14" column="2" selection-start="588" selection-end="588" vertical-scroll-proportion="-8.75">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="kuvia_09.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/kuvia_09.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="15" column="4" selection-start="331" selection-end="331" vertical-scroll-proportion="-9.375">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="kuvia_09_en.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/kuvia_09_en.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="11" column="4" selection-start="230" selection-end="230" vertical-scroll-proportion="-2.0886075">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="kuvia_08.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/kuvia_08.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="30" column="41" selection-start="806" selection-end="806" vertical-scroll-proportion="-5.6962028">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="kuvia_08_en.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/kuvia_08_en.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="28" column="41" selection-start="747" selection-end="747" vertical-scroll-proportion="-3.0253165">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="kuvia_07.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/kuvia_07.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="43" column="4" selection-start="940" selection-end="940" vertical-scroll-proportion="-12.9">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="kuvia_07_en.html" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/kuvia_07_en.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="9" column="4" selection-start="192" selection-end="192" vertical-scroll-proportion="-0.8969555">
               <folding />
             </state>
           </provider>
@@ -111,6 +168,12 @@
       <list>
         <option value="$PROJECT_DIR$/kuvat1_en.html" />
         <option value="$PROJECT_DIR$/kuvat1.html" />
+        <option value="$PROJECT_DIR$/kuvia_09.html" />
+        <option value="$PROJECT_DIR$/kuvia_09_en.html" />
+        <option value="$PROJECT_DIR$/kuvia_08.html" />
+        <option value="$PROJECT_DIR$/kuvia_08_en.html" />
+        <option value="$PROJECT_DIR$/kuvia_07.html" />
+        <option value="$PROJECT_DIR$/kuvia_07_en.html" />
       </list>
     </option>
   </component>
@@ -281,6 +344,9 @@
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
   <component name="StructuralSearchPlugin">
+    <replaceConfiguration name="xml tag" text="&lt;$a$&gt;" recursive="false" caseInsensitive="false" type="HTML" reformatAccordingToStyle="true" shortenFQN="true" replacement="&lt;$a$/&gt;" history="1">
+      <constraint name="a" within="" contains="" />
+    </replaceConfiguration>
     <replaceConfiguration name="user defined" text="&lt;img $a$&gt;" recursive="false" caseInsensitive="false" type="HTML" reformatAccordingToStyle="true" shortenFQN="true" replacement="&lt;img $a$ /&gt;" history="1">
       <constraint name="a" within="" contains="" />
     </replaceConfiguration>
@@ -309,7 +375,7 @@
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32889965" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -321,12 +387,12 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.249694" sideWeight="0.49576783" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24938725" sideWeight="0.49093106" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24938725" sideWeight="0.6711004" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39903265" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -388,16 +454,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/alkeiskurssi.html">
+    <entry file="file://$PROJECT_DIR$/harjoitukset.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="24" selection-start="543" selection-end="543" vertical-scroll-proportion="-8.125">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/harjoitukset.html">
+    <entry file="file://$PROJECT_DIR$/kuvat1_en.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="26" column="0" selection-start="670" selection-end="670" vertical-scroll-proportion="-16.25">
           <folding />
         </state>
       </provider>
@@ -409,9 +475,56 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/kuvat1_en.html">
+    <entry file="file://$PROJECT_DIR$/gallery/2009/IMG_1726.JPG">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kuvia_09.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="0" selection-start="670" selection-end="670" vertical-scroll-proportion="0.5025773">
+        <state line="15" column="4" selection-start="331" selection-end="331" vertical-scroll-proportion="-9.375">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alkeiskurssi.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="24" selection-start="543" selection-end="543" vertical-scroll-proportion="-15.625">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kuvia_09_en.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="4" selection-start="230" selection-end="230" vertical-scroll-proportion="-2.0886075">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kuvia_08.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="41" selection-start="806" selection-end="806" vertical-scroll-proportion="-5.6962028">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kuvia_08_en.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="41" selection-start="747" selection-end="747" vertical-scroll-proportion="-3.0253165">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kuvia_07.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="43" column="4" selection-start="940" selection-end="940" vertical-scroll-proportion="-12.9">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kuvia_07_en.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="4" selection-start="192" selection-end="192" vertical-scroll-proportion="-0.8969555">
           <folding />
         </state>
       </provider>

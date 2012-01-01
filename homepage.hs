@@ -21,6 +21,10 @@ main = hakyll $ do
         route   idRoute
         compile copyFileCompiler
 
+    match "js/*" $ do
+        route   idRoute
+        compile copyFileCompiler
+
     match "templates/*" $ compile templateCompiler
     
     -- Tavalliset sivut, joissa voi olla yksi, kaksi tai kolme palstaa

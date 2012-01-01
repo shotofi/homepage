@@ -15,14 +15,35 @@ function naviLinkToText(href) {
   link.parent().text(linkText)
 }
 
+function englishPage() { return $('html').attr('lang') === 'en'}
+
 function localizePage(page) {
-  if($('html').attr('lang') === 'en') {
+  if(englishPage()) {
     return page + "_en.html"
   } else {
     return page + ".html"
   }
 }
 
+function parseEnglishUrl() {
+  var pathname = window.location.pathname
+  if (pathname == "/main.html") return "english.html"
+  else return pathname.slice(0, -5) + "_en.html"
+}
+
+function parseFinnishUrl() {
+  var pathname = window.location.pathname
+  if (pathname == "/english.html") return "main.html"
+  else return pathname.slice(0, -8) + ".html"
+}
+
+function changeLanguage() {
+  if(englishPage()) {
+    window.location.pathname = parseFinnishUrl()
+  } else {
+    window.location.pathname = parseEnglishUrl()
+  }
+}
 
 $(function() {
   naviLinkToText(parseNavigation())

@@ -13,10 +13,6 @@ main = hakyll $ do
         route   idRoute
         compile copyFileCompiler
  
-    match "css/*" $ do
-        route   idRoute
-        compile compressCssCompiler
-
     match "pdf/*" $ do
         route   idRoute
         compile copyFileCompiler
@@ -24,6 +20,10 @@ main = hakyll $ do
     match "js/*" $ do
         route   idRoute
         compile copyFileCompiler
+
+    match "css/*" $ do
+        route   idRoute
+        compile compressCssCompiler
 
     match "templates/*" $ compile templateCompiler
     

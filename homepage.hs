@@ -4,7 +4,7 @@ import System.FilePath
 import Hakyll
 
 main :: IO ()
-main = hakyll $ do
+main = hakyllWith config $ do
     match "images/*" $ do
         route   idRoute
         compile copyFileCompiler
@@ -56,6 +56,11 @@ main = hakyll $ do
             >>> applyTemplateCompiler "templates/gallery_en.html"
             >>> applyTemplateCompiler "templates/template_en.html"
             >>> relativizeUrlsCompiler
+
+config :: HakyllConfiguration
+config = defaultHakyllConfiguration
+  { deployCommand = "scp -r _site/* shotofi@shotofi:public_html/"
+  }
 
 setRoot :: Routes
 setRoot = customRoute stripTopDir

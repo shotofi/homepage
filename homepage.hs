@@ -1,7 +1,14 @@
 {-# LANGUAGE OverloadedStrings #-}
 import Control.Arrow (arr, (>>>))
 import System.FilePath
+import System.Locale (TimeLocale, defaultTimeLocale)
+import System.IO
+import System.IO.Unsafe (unsafePerformIO)
+import System.Process
+import Control.Monad
+import Data.Time.Format (parseTime, formatTime)
 import Hakyll
+import Hakyll.Core.Compiler
 
 main :: IO ()
 main = hakyllWith config $ do
@@ -31,6 +38,8 @@ main = hakyllWith config $ do
     match (predicate (\i -> matches "pages/*.html" i && not (matches "pages/*_en.html" i))) $ do
         route setRoot
         compile $ readPageCompiler
+            >>> addDefaultFields
+            >>> arr setGitValues
             >>> applyTemplateCompiler "templates/template.html"
             >>> relativizeUrlsCompiler
 
@@ -39,6 +48,8 @@ main = hakyllWith config $ do
     match (predicate (\i -> matches "pages_gallery/*.html" i && not (matches "pages_gallery/*_en.html" i))) $ do
         route setRoot
         compile $ readPageCompiler
+            >>> addDefaultFields
+            >>> arr setGitValues        
             >>> applyTemplateCompiler "templates/gallery.html"
             >>> applyTemplateCompiler "templates/template.html"
             >>> relativizeUrlsCompiler
@@ -47,12 +58,16 @@ main = hakyllWith config $ do
     match (predicate (\i -> matches "pages/*_en.html" i)) $ do
         route setRoot
         compile $ readPageCompiler
+            >>> addDefaultFields
+            >>> arr setGitValues
             >>> applyTemplateCompiler "templates/template_en.html"
             >>> relativizeUrlsCompiler
 
     match (predicate (\i -> matches "pages_gallery/*_en.html" i)) $ do
         route setRoot
         compile $ readPageCompiler
+            >>> addDefaultFields
+            >>> arr setGitValues        
             >>> applyTemplateCompiler "templates/gallery_en.html"
             >>> applyTemplateCompiler "templates/template_en.html"
             >>> relativizeUrlsCompiler
@@ -67,3 +82,15 @@ setRoot = customRoute stripTopDir
 
 --stripTopDir :: Identifier -> FilePath -- fix this
 stripTopDir = joinPath . tail . splitPath . toFilePath
+
+setGitValues :: Page a -> Page a
+setGitValues page = setField "date" gitDate page
+  where
+    absPath =  "/Users/jvesala/Git/homepage/" ++ (getField "path" page)
+    gitDate = unsafePerformIO $ readDate absPath
+
+readDate :: String -> IO String
+readDate file = do
+  let cmd = "git"
+  let params = ["log", "--pretty=format:%ai", file]
+  liftM (take 19) $ readProcess cmd params []

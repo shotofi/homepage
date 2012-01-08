@@ -5,8 +5,10 @@ import System.Locale (TimeLocale, defaultTimeLocale)
 import System.IO
 import System.IO.Unsafe (unsafePerformIO)
 import System.Process
+import System.Directory
 import Control.Monad
 import Data.Time.Format (parseTime, formatTime)
+import Data.Time.Clock (UTCTime)
 import Hakyll
 import Hakyll.Core.Compiler
 
@@ -39,7 +41,7 @@ main = hakyllWith config $ do
         route setRoot
         compile $ readPageCompiler
             >>> addDefaultFields
-            >>> arr setGitValues
+            >>> arr (setGitValues "%d.%m.%Y %R")
             >>> applyTemplateCompiler "templates/template.html"
             >>> relativizeUrlsCompiler
 
@@ -49,7 +51,7 @@ main = hakyllWith config $ do
         route setRoot
         compile $ readPageCompiler
             >>> addDefaultFields
-            >>> arr setGitValues        
+            >>> arr (setGitValues "%d.%m.%Y %R")
             >>> applyTemplateCompiler "templates/gallery.html"
             >>> applyTemplateCompiler "templates/template.html"
             >>> relativizeUrlsCompiler
@@ -59,7 +61,7 @@ main = hakyllWith config $ do
         route setRoot
         compile $ readPageCompiler
             >>> addDefaultFields
-            >>> arr setGitValues
+            >>> arr (setGitValues "%d.%m.%Y %R")
             >>> applyTemplateCompiler "templates/template_en.html"
             >>> relativizeUrlsCompiler
 
@@ -67,7 +69,7 @@ main = hakyllWith config $ do
         route setRoot
         compile $ readPageCompiler
             >>> addDefaultFields
-            >>> arr setGitValues        
+            >>> arr (setGitValues "%d.%m.%Y %R")
             >>> applyTemplateCompiler "templates/gallery_en.html"
             >>> applyTemplateCompiler "templates/template_en.html"
             >>> relativizeUrlsCompiler
@@ -83,11 +85,16 @@ setRoot = customRoute stripTopDir
 --stripTopDir :: Identifier -> FilePath -- fix this
 stripTopDir = joinPath . tail . splitPath . toFilePath
 
-setGitValues :: Page a -> Page a
-setGitValues page = setField "date" gitDate page
+setGitValues :: String -> Page a -> Page a
+setGitValues format page = setField "updated" gitDate page
   where
-    absPath =  "/Users/jvesala/Git/homepage/" ++ (getField "path" page)
-    gitDate = unsafePerformIO $ readDate absPath
+    absPath = (unsafePerformIO $ getCurrentDirectory) ++ "/" ++ (getField "path" page)
+    date = parseTime defaultTimeLocale "%F %T %Z" $ unsafePerformIO $ readDate absPath
+    gitDate = formatTime' format date
+    
+formatTime' :: String -> Maybe UTCTime -> String
+formatTime' _ Nothing = ""
+formatTime' format (Just t) = formatTime defaultTimeLocale format t    
 
 readDate :: String -> IO String
 readDate file = do

@@ -88,7 +88,7 @@ stripTopDir = joinPath . tail . splitPath . toFilePath
 setGitValues :: String -> Page a -> Page a
 setGitValues format page = setField "updated" gitDate page
   where
-    absPath = (unsafePerformIO $ getCurrentDirectory) ++ "/" ++ (getField "path" page)
+    absPath = unsafePerformIO $ liftM (++ "/" ++ (getField "path" page)) $ getCurrentDirectory
     date = parseTime defaultTimeLocale "%F %T %Z" $ unsafePerformIO $ readDate absPath
     gitDate = formatTime' format date
     

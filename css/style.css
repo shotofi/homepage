@@ -14,9 +14,10 @@ p {padding-top: 5px; padding-bottom: 5px; font-size: 13px;}
 .header img { width: 305px; height: 94px; float: left;}
 .header nav { clear: left;}
 
-.tabs { background: #0080C0; list-style: none; color: white; margin: 5px 0 15px 0;}
+nav { margin: 5px 0 15px 0; }
+.tabs { background: #0080C0; list-style: none; color: white; border-radius: 5px; }
 .tabs a { color: white; font-weight: bold;}
-.tabs li { display: inline; padding: 5px; line-height: 20px;}
+.tabs li { display: inline; padding: 5px; line-height: 25px;}
 .tabs li:after {content: "|"; padding-left: 15px;}
 
 .content { overflow: auto;}

@@ -43,7 +43,13 @@ function changeLanguage() {
   }
 }
 
+function selectRandomHeaderImage() {
+  var number = 1 + Math.floor(Math.random()*9)
+  $('.header img').attr("src", "./images/kds_web_logo" + number + ".gif")
+}
+
 $(function() {
+  selectRandomHeaderImage()
   naviLinkToText(parseNavigation())
 })
 

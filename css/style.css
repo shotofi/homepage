@@ -13,7 +13,7 @@ img.email { vertical-align: bottom; margin-left: 0;}
 .header .top { height: 95px;}
 .header .language { color: #fff; background: #000; float: right; width: 250px; margin-top: 30px; padding: 3px 3px; border-radius: 5px; }
 .header .language a { color: #fff; float: right; }
-.header img { width: 305px; height: 94px; float: left;}
+.header img {  float: left;}
 .header nav { clear: left;}
 
 nav { margin: 5px 0 15px 0; }

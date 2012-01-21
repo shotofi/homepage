@@ -17,7 +17,7 @@ p {padding-top: 5px; padding-bottom: 5px; font-size: 13px;}
 nav { margin: 5px 0 15px 0; }
 .tabs { background: #0080C0; list-style: none; color: white; border-radius: 5px; }
 .tabs a { color: white; font-weight: bold;}
-.tabs li { display: inline; padding: 5px; line-height: 25px;}
+.tabs li { display: inline; padding: 5px; line-height: 25px; white-space: nowrap;}
 .tabs li:first-of-type { margin-left: 10px; }
 .tabs li:after {content: "|"; padding-left: 15px;}
 

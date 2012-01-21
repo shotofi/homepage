@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fi" lang="fi">
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   <meta name="Author" content="Jussi Vesala, Henri Veisterä" />
+   <meta name="KeyWords" content="TKY,tky,karate,karate-do,shotokai,KDS,kds,Funakoshi" />
+   <title>Shotokai Karate - $title$</title>
+   <link rel="stylesheet" type="text/css" href="/css/cssreset-min.css" />
+   <link rel="stylesheet" type="text/css" href="/css/style.css" />
+   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+   <script type="text/javascript" src="/js/homepage.js"></script>
+</head>
+<body>
+
+<div class="header">
+  <div class="top">
+    <img src="/images/ajax-loader.gif" alt="Karate Do Shotokai" />
+    <div class="language"><a href="#" title="English version of the pages" onclick="changeLanguage()">English version ></a></div>
+  </div>
+  <nav>
+    <ul class="tabs gradient">
+      <li><a href="index.html" title="Takaisin pääsivulle">pääsivu</a></li>
+      <li><a href="harjoitukset.html" title="Tietoa harjoitusajoista ja -paikoista">harjoitukset</a></li>
+      <li><a href="alkeiskurssi.html" title="Tietoa alkeiskurssista">alkeiskurssi</a></li>
+      <li><a href="leirit.html" title="Tietoa leireistä">leirit</a></li>
+      <li><a href="yleistietoa.html" title="Yleistietoa seurasta">yleistietoa</a></li>
+      <li><a href="muistoja.html" title="Karate kuvia">muistoja</a></li>
+      <li><a href="tyylikuvaus.html" title="Kuvaus tyylisuunnasta">tyylikuvaus</a></li>
+      <li><a href="katat.html" title="Shotokai katat">katat</a></li>
+      <li><a href="muumaailma.html" title="Linkkejä muualle">muumaailma</a></li>
+    </ul>
+  </nav>
+</div>
+
+<div class="content">
+ <h1>Virhetilanne / Error</h1>
+ <p>Valitsemaasi sivua ei löytynyt.</p>
+ <p>The page was not found. Click top right for English version.</p>
+ 
+</div>
+
+<div class="footer">
+  <ul class="tabs gradient">
+    <li><a href="yhteystiedot.html" title="Seuran yhteystiedot">yhteystiedot</a></li>
+    <li><a href="muutokset.html" title="Sivuston viimeaikaiset muutokset">muutokset</a></li>
+    <li class="updated"></li>
+  </ul>
+</div>
+
+</body>
+</html>

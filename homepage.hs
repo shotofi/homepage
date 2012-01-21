@@ -76,7 +76,7 @@ main = hakyllWith config $ do
 
 config :: HakyllConfiguration
 config = defaultHakyllConfiguration
-  { deployCommand = "scp -r _site/* shotofi@shotofi:public_html/"
+  { deployCommand = "scp -r _site/* shotofi@shoto.fi:public_html/"
   }
 
 setRoot :: Routes

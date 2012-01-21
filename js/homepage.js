@@ -27,14 +27,12 @@ function localizePage(page) {
 
 function parseEnglishUrl() {
   var pathname = window.location.pathname
-  if (pathname == "/main.html") return "english.html"
-  else return pathname.slice(0, -5) + "_en.html"
+  return pathname.slice(0, -5) + "_en.html"
 }
 
 function parseFinnishUrl() {
   var pathname = window.location.pathname
-  if (pathname == "/english.html") return "main.html"
-  else return pathname.slice(0, -8) + ".html"
+  return pathname.slice(0, -8) + ".html"
 }
 
 function changeLanguage() {

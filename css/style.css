@@ -93,3 +93,27 @@ nav { margin: 5px 0 15px 0; }
 .saannot li { list-style: disc outside; }
 
 .center-images { text-align: center;}
+
+
+
+
+
+.gradient {
+  
+  background-image: linear-gradient(left , rgb(0,128,192) 35%, rgb(0,128,192) 60%, rgb(0,102,149) 100%);
+  background-image: -o-linear-gradient(left , rgb(0,128,192) 35%, rgb(0,128,192) 60%, rgb(0,102,149) 100%);
+  background-image: -moz-linear-gradient(left , rgb(0,128,192) 35%, rgb(0,128,192) 60%, rgb(0,102,149) 100%);
+  background-image: -webkit-linear-gradient(left , rgb(0,128,192) 35%, rgb(0,128,192) 60%, rgb(0,102,149) 100%);
+  background-image: -ms-linear-gradient(left , rgb(0,128,192) 35%, rgb(0,128,192) 60%, rgb(0,102,149) 100%);
+
+  background-image: -webkit-gradient(
+  	linear,
+  	left top,
+  	right top,
+  	color-stop(0.35, rgb(0,128,192)),
+  	color-stop(0.6, rgb(0,128,192)),
+  	color-stop(1, rgb(0,102,149))
+  );
+  
+  
+}

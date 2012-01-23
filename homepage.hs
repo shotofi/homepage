@@ -82,7 +82,7 @@ config = defaultHakyllConfiguration
 setRoot :: Routes
 setRoot = customRoute stripTopDir
 
---stripTopDir :: Identifier -> FilePath -- fix this
+stripTopDir :: Identifier a -> FilePath
 stripTopDir = joinPath . tail . splitPath . toFilePath
 
 setGitValues :: String -> Page a -> Page a

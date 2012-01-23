@@ -86,14 +86,14 @@ stripTopDir :: Identifier a -> FilePath
 stripTopDir = joinPath . tail . splitPath . toFilePath
 
 setGitValues :: String -> Page a -> Page a
-setGitValues format page = setField "updated" (unsafePerformIO $ unsafeGitDate format $ getField "path" page) page
+setGitValues format page = setField "updated" (unsafePerformIO $ gitDate format $ getField "path" page) page
 
-unsafeGitDate :: String -> String -> IO String
-unsafeGitDate format path = do
+gitDate :: String -> String -> IO String
+gitDate format path = do
   dir <- getCurrentDirectory
   let absPath = dir ++ "/" ++ path
   dateString <- readDate absPath
-  return $ formatTime' format $  parseTime defaultTimeLocale "%F %T %Z" dateString
+  return $ formatTime' format $ parseTime defaultTimeLocale "%F %T %Z" dateString
 
 formatTime' :: String -> Maybe UTCTime -> String
 formatTime' _ Nothing = ""

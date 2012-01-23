@@ -86,12 +86,15 @@ setRoot = customRoute stripTopDir
 stripTopDir = joinPath . tail . splitPath . toFilePath
 
 setGitValues :: String -> Page a -> Page a
-setGitValues format page = setField "updated" gitDate page
-  where
-    absPath = unsafePerformIO $ liftM (++ "/" ++ (getField "path" page)) $ getCurrentDirectory
-    date = parseTime defaultTimeLocale "%F %T %Z" $ unsafePerformIO $ readDate absPath
-    gitDate = formatTime' format date
-    
+setGitValues format page = setField "updated" (unsafePerformIO $ unsafeGitDate format $ getField "path" page) page
+
+unsafeGitDate :: String -> String -> IO String
+unsafeGitDate format path = do
+  dir <- getCurrentDirectory
+  let absPath = dir ++ "/" ++ path
+  dateString <- readDate absPath
+  return $ formatTime' format $  parseTime defaultTimeLocale "%F %T %Z" dateString
+
 formatTime' :: String -> Maybe UTCTime -> String
 formatTime' _ Nothing = ""
 formatTime' format (Just t) = formatTime defaultTimeLocale format t    

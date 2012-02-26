@@ -41,7 +41,7 @@ main = hakyllWith config $ do
         route setRoot
         compile $ readPageCompiler
             >>> addDefaultFields
-            >>> arr (setGitValues "%d.%m.%Y %R")
+            >>> arr (setGitValues)
             >>> applyTemplateCompiler "templates/template.html"
             >>> relativizeUrlsCompiler
 
@@ -51,7 +51,7 @@ main = hakyllWith config $ do
         route setRoot
         compile $ readPageCompiler
             >>> addDefaultFields
-            >>> arr (setGitValues "%d.%m.%Y %R")
+            >>> arr (setGitValues)
             >>> applyTemplateCompiler "templates/gallery.html"
             >>> applyTemplateCompiler "templates/template.html"
             >>> relativizeUrlsCompiler
@@ -61,7 +61,7 @@ main = hakyllWith config $ do
         route setRoot
         compile $ readPageCompiler
             >>> addDefaultFields
-            >>> arr (setGitValues "%d.%m.%Y %R")
+            >>> arr (setGitValues)
             >>> applyTemplateCompiler "templates/template_en.html"
             >>> relativizeUrlsCompiler
 
@@ -69,7 +69,7 @@ main = hakyllWith config $ do
         route setRoot
         compile $ readPageCompiler
             >>> addDefaultFields
-            >>> arr (setGitValues "%d.%m.%Y %R")
+            >>> arr (setGitValues)
             >>> applyTemplateCompiler "templates/gallery_en.html"
             >>> applyTemplateCompiler "templates/template_en.html"
             >>> relativizeUrlsCompiler
@@ -85,8 +85,14 @@ setRoot = customRoute stripTopDir
 stripTopDir :: Identifier a -> FilePath
 stripTopDir = joinPath . tail . splitPath . toFilePath
 
-setGitValues :: String -> Page a -> Page a
-setGitValues format page = setField "updated" (unsafePerformIO $ gitDate format $ getField "path" page) page
+setGitValues :: Page a -> Page a
+setGitValues page = setField "updated" (unsafePerformIO $ gitDate format $ getField "path" page) $ page
+  where format = "%d.%m.%Y %R"
+
+setGitValues' :: Page a -> IO (Page a)
+setGitValues' page = liftM (setUpdated page) $ (gitDate format $ getField "path" page)
+  where setUpdated page date = setField "updated" date page
+        format = "%d.%m.%Y %R"
 
 gitDate :: String -> String -> IO String
 gitDate format path = do

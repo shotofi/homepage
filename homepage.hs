@@ -86,20 +86,20 @@ stripTopDir :: Identifier a -> FilePath
 stripTopDir = joinPath . tail . splitPath . toFilePath
 
 setGitValues :: Page a -> Page a
-setGitValues page = setField "updated" (unsafePerformIO $ gitDate format $ getField "path" page) $ page
-  where format = "%d.%m.%Y %R"
+setGitValues page = setField "updated" (unsafePerformIO $ gitDate $ getField "path" page) $ page
 
 setGitValues' :: Page a -> IO (Page a)
-setGitValues' page = liftM (setUpdated page) $ (gitDate format $ getField "path" page)
+setGitValues' page = liftM (setUpdated page) $ (gitDate $ getField "path" page)
   where setUpdated page date = setField "updated" date page
-        format = "%d.%m.%Y %R"
 
-gitDate :: String -> String -> IO String
-gitDate format path = do
+gitDate :: String -> IO String
+gitDate path = do
   dir <- getCurrentDirectory
   let absPath = dir ++ "/" ++ path
+  let format = "%d.%m.%Y %R"
   dateString <- readDate absPath
-  return $ formatTime' format $ parseTime defaultTimeLocale "%F %T %Z" dateString
+  let utctime = parseTime defaultTimeLocale "%F %T %Z" dateString
+  return $ formatTime' format utctime
 
 formatTime' :: String -> Maybe UTCTime -> String
 formatTime' _ Nothing = ""

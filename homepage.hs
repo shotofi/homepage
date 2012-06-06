@@ -1,16 +1,12 @@
 {-# LANGUAGE OverloadedStrings #-}
 import Control.Arrow (arr, (>>>))
 import System.FilePath
-import System.Locale (TimeLocale, defaultTimeLocale)
 import System.IO
 import System.IO.Unsafe (unsafePerformIO)
-import System.Process
-import System.Directory
 import Control.Monad
-import Data.Time.Format (parseTime, formatTime)
-import Data.Time.Clock (UTCTime)
 import Hakyll
 import Hakyll.Core.Compiler
+import Git
 
 main :: IO ()
 main = hakyllWith config $ do
@@ -91,22 +87,3 @@ setGitValues page = setField "updated" (unsafePerformIO $ gitDate $ getField "pa
 setGitValues' :: Page a -> IO (Page a)
 setGitValues' page = liftM (setUpdated page) $ (gitDate $ getField "path" page)
   where setUpdated page date = setField "updated" date page
-
-gitDate :: String -> IO String
-gitDate path = do
-  dir <- getCurrentDirectory
-  let absPath = dir ++ "/" ++ path
-  let format = "%d.%m.%Y %R"
-  dateString <- readDate absPath
-  let utctime = parseTime defaultTimeLocale "%F %T %Z" dateString
-  return $ formatTime' format utctime
-
-formatTime' :: String -> Maybe UTCTime -> String
-formatTime' _ Nothing = ""
-formatTime' format (Just t) = formatTime defaultTimeLocale format t    
-
-readDate :: String -> IO String
-readDate file = do
-  let cmd = "git"
-  let params = ["log", "--pretty=format:%ai", file]
-  liftM (take 19) $ readProcess cmd params []

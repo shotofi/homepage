@@ -1,5 +1,11 @@
+{-# LANGUAGE DeriveDataTypeable #-}
+
 module Git where
 
+import Data.Data
+import Data.Typeable
+import Data.List
+import Data.Ord
 import System.FilePath
 import System.Locale (TimeLocale, defaultTimeLocale)
 import Data.Time.Format (parseTime, formatTime)
@@ -13,10 +19,7 @@ gitDate path = do
   dir <- getCurrentDirectory
   let absPath = dir ++ "/" ++ path
   dateString <- readDate absPath
-  return $ parseDate dateString
-
-parseDate :: String -> String
-parseDate = defaultFormat . parseTime defaultTimeLocale "%F %T %Z"
+  return $ defaultFormat dateString
 
 defaultFormat :: Maybe UTCTime -> String
 defaultFormat = formatTime' "%d.%m.%Y %R"
@@ -25,9 +28,39 @@ formatTime' :: String -> Maybe UTCTime -> String
 formatTime' _ Nothing = ""
 formatTime' format (Just t) = formatTime defaultTimeLocale format t    
 
-readDate :: String -> IO String
+readDate :: String -> IO (Maybe UTCTime)
 readDate file = do
   let cmd = "git"
   let params = ["log", "--pretty=format:%ai", file]
-  liftM (take 19) $ readProcess cmd params []  
+  dateString <- liftM (take 19) $ readProcess cmd params []
+  return (parseTime defaultTimeLocale "%F %T %Z" dateString)
 
+-------------------
+-- HTML page stuff
+-------------------
+data HtmlPage = HtmlPage { absPath :: String, title:: String, url :: String, date :: Maybe UTCTime} deriving (Data, Typeable, Show)
+
+fileInfo :: String -> String-> String -> IO HtmlPage
+fileInfo path title url = do 
+  date <- readDate path
+  return $ HtmlPage path title url date
+
+createUrl :: HtmlPage -> String
+createUrl page = "<a href=\"" ++ url' ++ "\">" ++ link ++ "</a>"
+  where url'   = (url page)
+        title' = (title page)
+        date'  = defaultFormat $ (date page)
+        link   = title' ++ " (" ++ date' ++ ")"  
+  
+content :: String -> String -> IO [HtmlPage]
+content basedir htmldir = do
+  let dir = basedir ++ "/" ++ htmldir
+  paths <- getDirectoryContents dir
+  let files = filter (isSuffixOf "html") paths
+  mapM (\x -> fileInfo (dir ++ "/" ++ x) x x) files
+  
+pageList pages = do 
+  page <- pages
+  let sorted = sortBy (comparing date) page
+  return (reverse $ map createUrl sorted)
+  

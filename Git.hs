@@ -41,6 +41,12 @@ readDate file = do
 -------------------
 data HtmlPage = HtmlPage { absPath :: String, title:: String, url :: String, date :: Maybe UTCTime} deriving (Data, Typeable, Show)
 
+pageChanges :: [String] -> IO String
+pageChanges dirs = do 
+  root <- getCurrentDirectory
+  let contents = liftM concat $ mapM (\x -> content root x) dirs
+  pageList contents
+
 content :: String -> String -> IO [HtmlPage]
 content basedir htmldir = do
   let dir = basedir ++ "/" ++ htmldir
@@ -49,9 +55,17 @@ content basedir htmldir = do
   mapM (\x -> fileInfo (dir ++ "/" ++ x) x x) files
 
 fileInfo :: String -> String-> String -> IO HtmlPage
-fileInfo absPath title url = do 
+fileInfo absPath title url = do
   date <- readDate absPath
   return $ HtmlPage absPath title url date
+
+pageList :: IO [HtmlPage] -> IO String
+pageList pages = do 
+  page <- pages
+  let sorted = reverse $ sortBy (comparing date `mappend` comparing title) page
+      urls   = map createUrl sorted
+      lis    = map (\x -> "<li>" ++ x ++ "</li>") urls
+  return ("<ul>" ++ (join lis) ++ "</ul>")
 
 createUrl :: HtmlPage -> String
 createUrl page = "<a href=\"" ++ url' ++ "\">" ++ link ++ "</a>"
@@ -59,11 +73,4 @@ createUrl page = "<a href=\"" ++ url' ++ "\">" ++ link ++ "</a>"
         title' = (title page)
         date'  = defaultFormat $ (date page)
         link   = title' ++ " (" ++ date' ++ ")"
-  
-pageList pages = do 
-  page <- pages
-  let sorted = reverse $ sortBy (comparing date `mappend` comparing title) page
-      urls   = map createUrl sorted
-      lis    = map (\x -> "<li>" ++ x ++ "</li>") urls      
-  return ("<ul>" ++ (join lis) ++ "</ul>")
   

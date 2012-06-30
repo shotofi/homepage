@@ -70,6 +70,28 @@ main = hakyllWith config $ do
             >>> applyTemplateCompiler "templates/template_en.html"
             >>> relativizeUrlsCompiler
 
+    -- CHANGES PAGES
+    match "pages_changes/muutokset.html" $ do 
+        route setRoot
+        compile $ readPageCompiler
+            >>> addDefaultFields
+            >>> arr (setGitValues)            
+            >>> arr (setChanges)        
+            >>> applyTemplateCompiler "templates/changes.html"
+            >>> applyTemplateCompiler "templates/template.html"
+            >>> relativizeUrlsCompiler
+
+    match "pages_changes/muutokset_en.html" $ do 
+        route setRoot
+        compile $ readPageCompiler
+            >>> addDefaultFields
+            >>> arr (setGitValues)            
+            >>> arr (setChanges)        
+            >>> applyTemplateCompiler "templates/changes.html"
+            >>> applyTemplateCompiler "templates/template_en.html"
+            >>> relativizeUrlsCompiler
+
+    
 config :: HakyllConfiguration
 config = defaultHakyllConfiguration
   { deployCommand = "scp -r _site/* shotofi@shoto.fi:public_html/"
@@ -87,3 +109,6 @@ setGitValues page = setField "updated" (unsafePerformIO $ gitDate $ getField "pa
 setGitValues' :: Page a -> IO (Page a)
 setGitValues' page = liftM (setUpdated page) $ (gitDate $ getField "path" page)
   where setUpdated page date = setField "updated" date page
+  
+setChanges :: Page a -> Page a
+setChanges page = setField "changes" (unsafePerformIO $ pageChanges ["pages", "pages_gallery"]) $ page

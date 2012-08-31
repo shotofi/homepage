@@ -36,7 +36,9 @@ function parseFinnishUrl() {
 }
 
 function changeLanguage() {
-  if(englishPage()) {
+  if(window.location.pathname == "/") {
+    window.location.pathname = "index_en.html"
+  } else if(englishPage()) {
     window.location.pathname = parseFinnishUrl()
   } else {
     window.location.pathname = parseEnglishUrl()

@@ -1,0 +1,18 @@
+#header-wrapper h1 { background: url("../images/skds_logo.png") no-repeat 10px 2px; }
+
+#unitext { position: absolute; top: 31px; right: 29px; }
+#unilogo { position: absolute; top: 15px; right: -60px; }
+
+#header h1 { padding-left: 130px; width: 400px; height: 100px; line-height: 40px; bottom: 20px; padding-top: 10px; font-family: 'Ubuntu Condensed', sans-serif; font-weight: bold; letter-spacing: -2px;}
+#slogan { position: absolute; top: 121px; left: 132px; color: whiteSmoke; font-style: italic; }
+
+#header nav { bottom: 30px; }
+
+nav li { display: inline-block; padding-top: 20px;}
+nav li:nth-child(2) { background: url("../images/tikku-ukko2.png") no-repeat 0px 0px; }
+nav li:nth-child(3) { background: url("../images/tikku-ukko3.png") no-repeat 0px 0px; }
+nav li:nth-child(4) { background: url("../images/tikku-ukko4.png") no-repeat 0px 0px; }
+nav li:nth-child(5) { background: url("../images/tikku-ukko1.png") no-repeat 0px 0px; }
+
+
+XXX#logo { position: absolute; top: 0; left: 0; width: 60px; height: 100px; }

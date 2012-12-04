@@ -31,8 +31,8 @@ main = hakyllWith config $ do
         compile copyFileCompiler
 
     match "templates/*" $ compile templateCompiler
-    
-    match "snippets/*" $ compile myPageCompiler
+    match "menus/*"     $ compile myPageCompiler
+    match "snippets/*"  $ compile myPageCompiler
     
     match "pages/index.html" $ do
         route setRoot
@@ -43,12 +43,22 @@ main = hakyllWith config $ do
             >>> requireA "snippets/alkeiskurssi-mainos.html" (setFieldA "leftdown" $ arr pageBody)
             >>> requireA "snippets/harjoitusajat.html" (setFieldA "rightup" $ arr pageBody)
             >>> arr (setField "rightdown" "")
-            >>> arr (setField "breadcrumb" "Pääsivu")
             >>> applyTemplateCompiler "templates/three-column.html"
             >>> applyTemplateCompiler "templates/template.html"
             >>> relativizeUrlsCompiler
 
-    
+    forM_ ["pages/harjoittelu.html", "pages/katat.html", "pages/perustekniikka.html"] $ \p ->
+      match p $ do
+        route setRoot
+        compile $ readPageCompiler
+            >>> addDefaultFields
+            >>> arr (setGitValues)
+            >>> requireA "menus/menu-harjoittelu.html" (setFieldA "left" $ arr pageBody)
+            >>> applyTemplateCompiler "templates/two-column.html"
+            >>> applyTemplateCompiler "templates/template.html"
+            >>> relativizeUrlsCompiler
+
+
 config :: HakyllConfiguration
 config = defaultHakyllConfiguration
   { deployCommand = "scp -r _site/* shotofi@shoto.fi:public_html_test/"

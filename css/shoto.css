@@ -17,3 +17,6 @@ nav li:nth-child(5) { background: url("../images/tikku-ukko1.png") no-repeat 0px
 
 #content-wrapper {padding: 0;}
 #breadcrumb {margin-left: 76px; }
+
+.harjoittelu ul { margin-left: 20px; }
+.harjoittelu li { list-style: disc outside; }

@@ -43,6 +43,7 @@ main = hakyllWith config $ do
             >>> requireA "snippets/alkeiskurssi-mainos.html" (setFieldA "leftdown" $ arr pageBody)
             >>> requireA "snippets/harjoitusajat.html" (setFieldA "rightup" $ arr pageBody)
             >>> arr (setField "rightdown" "")
+            >>> arr (setField "breadcrumb" "Pääsivu")
             >>> applyTemplateCompiler "templates/three-column.html"
             >>> applyTemplateCompiler "templates/template.html"
             >>> relativizeUrlsCompiler

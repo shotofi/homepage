@@ -15,4 +15,5 @@ nav li:nth-child(4) { background: url("../images/tikku-ukko4.png") no-repeat 0px
 nav li:nth-child(5) { background: url("../images/tikku-ukko1.png") no-repeat 0px 0px; }
 
 
-XXX#logo { position: absolute; top: 0; left: 0; width: 60px; height: 100px; }
+#content-wrapper {padding: 0;}
+#breadcrumb {margin-left: 76px; }

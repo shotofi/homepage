@@ -31,8 +31,8 @@ main = hakyllWith config $ do
         compile copyFileCompiler
 
     match "templates/*" $ compile templateCompiler
-    match "menus/*"     $ compile myPageCompiler
-    match "snippets/*"  $ compile myPageCompiler
+    match "menus/*"     $ compile snippetCompiler
+    match "snippets/*"  $ compile snippetCompiler
     
     match "pages/index.html" $ do
         route setRoot
@@ -58,17 +58,30 @@ main = hakyllWith config $ do
             >>> applyTemplateCompiler "templates/template.html"
             >>> relativizeUrlsCompiler
 
+    match "pages/leirit.html" $ do
+        route setRoot
+        compile $ readPageCompiler
+            >>> addDefaultFields
+            >>> arr (setGitValues)
+            >>> requireA "menus/menu-harjoittelu.html" (setFieldA "leftup" $ arr pageBody)
+            >>> requireA "snippets/leirit-mainos.html" (setFieldA "rightup" $ arr pageBody)
+            >>> arr (setField "leftdown" "")
+            >>> arr (setField "rightdown" "")
+            >>> applyTemplateCompiler "templates/three-column.html"
+            >>> applyTemplateCompiler "templates/template.html"
+            >>> relativizeUrlsCompiler
+
 
 config :: HakyllConfiguration
 config = defaultHakyllConfiguration
   { deployCommand = "scp -r _site/* shotofi@shoto.fi:public_html_test/"
   }
 
-myPageCompiler :: Compiler Resource (Page String)
-myPageCompiler = readPageCompiler
+snippetCompiler :: Compiler Resource (Page String)
+snippetCompiler = readPageCompiler
   >>> addDefaultFields
   >>> arr applySelf
-
+  
 setRoot :: Routes
 setRoot = customRoute stripTopDir
 

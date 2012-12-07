@@ -1,7 +1,7 @@
 _cache/
 _site/
-homepage
-*.hi
-*.o
-.idea/misc.xml
-.idea/workspace.xml
+hs/homepage
+hs/*.hi
+hs/*.o
+.idea/*
+**.iml

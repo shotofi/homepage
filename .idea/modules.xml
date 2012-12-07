@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/homepage.iml" filepath="$PROJECT_DIR$/homepage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gallery/jannen/Jannen.iml" filepath="$PROJECT_DIR$/gallery/jannen/Jannen.iml" />
+      <module fileurl="file://$PROJECT_DIR$/menus/Menus.iml" filepath="$PROJECT_DIR$/menus/Menus.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pages/Pages.iml" filepath="$PROJECT_DIR$/pages/Pages.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gallery/risto/Risto.iml" filepath="$PROJECT_DIR$/gallery/risto/Risto.iml" />
+      <module fileurl="file://$PROJECT_DIR$/snippets/Snippets.iml" filepath="$PROJECT_DIR$/snippets/Snippets.iml" />
+      <module fileurl="file://$PROJECT_DIR$/templates/Templates.iml" filepath="$PROJECT_DIR$/templates/Templates.iml" />
     </modules>
   </component>
 </project>

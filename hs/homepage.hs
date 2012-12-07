@@ -82,6 +82,17 @@ main = hakyllWith config $ do
             >>> applyTemplateCompiler "templates/template.html"
             >>> relativizeUrlsCompiler
 
+    forM_ ["pages/yhteystiedot.html"] $ \p ->
+      match p $ do
+        route setRoot
+        compile $ readPageCompiler
+            >>> addDefaultFields
+            >>> arr (setGitValues)
+            >>> requireA "menus/menu-yhteystiedot.html" (setFieldA "left" $ arr pageBody)
+            >>> applyTemplateCompiler "templates/two-column.html"
+            >>> applyTemplateCompiler "templates/template.html"
+            >>> relativizeUrlsCompiler
+
 
 config :: HakyllConfiguration
 config = defaultHakyllConfiguration

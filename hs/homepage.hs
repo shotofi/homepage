@@ -72,6 +72,16 @@ main = hakyllWith config $ do
             >>> applyTemplateCompiler "templates/template.html"
             >>> relativizeUrlsCompiler
 
+    match "pages/alkeiskurssi.html" $ do
+        route setRoot
+        compile $ readPageCompiler
+            >>> addDefaultFields
+            >>> arr (setGitValues)
+            >>> requireA "snippets/alkeiskurssi-ohjelma.html" (setFieldA "right" $ arr pageBody)
+            >>> applyTemplateCompiler "templates/two-column2.html"
+            >>> applyTemplateCompiler "templates/template.html"
+            >>> relativizeUrlsCompiler
+
 
 config :: HakyllConfiguration
 config = defaultHakyllConfiguration

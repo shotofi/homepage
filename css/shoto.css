@@ -22,3 +22,6 @@ nav li:nth-child(5) { background: url("../images/tikku-ukko1.png") no-repeat 0px
 .harjoittelu li { list-style: disc outside; }
 
 .camp-times td { padding-right: 20px; }
+
+.alkeiskurssi dl { margin: 20px 0 0 20px;}
+.alkeiskurssi dd { margin-left: 40px;}

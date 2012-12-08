@@ -104,6 +104,18 @@ main = hakyllWith config $ do
             >>> applyTemplateCompiler "templates/template.html"
             >>> relativizeUrlsCompiler
 
+    -- CHANGES PAGES
+    match "pages/muutokset.html" $ do
+        route setRoot
+        compile $ readPageCompiler
+            >>> addDefaultFields
+            >>> arr (setGitValues)
+            >>> arr (setChanges)
+            >>> requireA "menus/menu-yhteystiedot.html" (setFieldA "left" $ arr pageBody)
+            >>> applyTemplateCompiler "templates/changes.html"
+            >>> applyTemplateCompiler "templates/two-column.html"
+            >>> applyTemplateCompiler "templates/template.html"
+            >>> relativizeUrlsCompiler
 
 config :: HakyllConfiguration
 config = defaultHakyllConfiguration

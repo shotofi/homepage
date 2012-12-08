@@ -94,6 +94,16 @@ main = hakyllWith config $ do
             >>> applyTemplateCompiler "templates/template.html"
             >>> relativizeUrlsCompiler
 
+    match "pages_gallery/*" $ do
+        route setRoot
+        compile $ readPageCompiler
+            >>> addDefaultFields
+            >>> arr (setGitValues)
+            >>> requireA "menus/menu-muistoja.html" (setFieldA "left" $ arr pageBody)
+            >>> applyTemplateCompiler "templates/two-column.html"
+            >>> applyTemplateCompiler "templates/template.html"
+            >>> relativizeUrlsCompiler
+
 
 config :: HakyllConfiguration
 config = defaultHakyllConfiguration

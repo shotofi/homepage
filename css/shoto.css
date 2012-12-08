@@ -25,3 +25,5 @@ nav li:nth-child(5) { background: url("../images/tikku-ukko1.png") no-repeat 0px
 .alkeiskurssi dd { margin-left: 40px;}
 
 img.email { vertical-align: middle; padding-bottom: 2px; }
+
+.menu-galleries img { max-width: 80px; clear:left; display: block;}

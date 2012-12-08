@@ -82,7 +82,8 @@ main = hakyllWith config $ do
             >>> applyTemplateCompiler "templates/template.html"
             >>> relativizeUrlsCompiler
 
-    forM_ ["pages/yhteystiedot.html"] $ \p ->
+    forM_ ["pages/yhteystiedot.html", "pages/muumaailma.html", "pages/karate_all.html",
+           "pages/jasenmaksut.html", "pages/saannot.html"] $ \p ->
       match p $ do
         route setRoot
         compile $ readPageCompiler

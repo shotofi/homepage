@@ -36,9 +36,7 @@ main = hakyllWith config $ do
     
     match "pages/index.html" $ do
         route setRoot
-        compile $ readPageCompiler
-            >>> addDefaultFields
-            >>> arr (setGitValues)
+        compile $ historyReadPageCompiler
             >>> requireA "snippets/tapahtumakalenteri.html" (setFieldA "leftup" $ arr pageBody)
             >>> requireA "snippets/alkeiskurssi-mainos.html" (setFieldA "leftdown" $ arr pageBody)
             >>> requireA "snippets/harjoitusajat.html" (setFieldA "rightup" $ arr pageBody)
@@ -51,9 +49,7 @@ main = hakyllWith config $ do
            "pages/tyylikuvaus.html", "pages/lajinvalinta.html", "pages/muiden_harrastajat.html"] $ \p ->
       match p $ do
         route setRoot
-        compile $ readPageCompiler
-            >>> addDefaultFields
-            >>> arr (setGitValues)
+        compile $ historyReadPageCompiler
             >>> requireA "menus/menu-harjoittelu.html" (setFieldA "left" $ arr pageBody)
             >>> applyTemplateCompiler "templates/two-column.html"
             >>> applyTemplateCompiler "templates/template.html"
@@ -61,9 +57,7 @@ main = hakyllWith config $ do
 
     match "pages/leirit.html" $ do
         route setRoot
-        compile $ readPageCompiler
-            >>> addDefaultFields
-            >>> arr (setGitValues)
+        compile $ historyReadPageCompiler
             >>> requireA "menus/menu-harjoittelu.html" (setFieldA "leftup" $ arr pageBody)
             >>> requireA "snippets/leirit-mainos.html" (setFieldA "rightup" $ arr pageBody)
             >>> arr (setField "leftdown" "")
@@ -74,9 +68,7 @@ main = hakyllWith config $ do
 
     match "pages/alkeiskurssi.html" $ do
         route setRoot
-        compile $ readPageCompiler
-            >>> addDefaultFields
-            >>> arr (setGitValues)
+        compile $ historyReadPageCompiler
             >>> requireA "snippets/alkeiskurssi-ohjelma.html" (setFieldA "right" $ arr pageBody)
             >>> applyTemplateCompiler "templates/two-column2.html"
             >>> applyTemplateCompiler "templates/template.html"
@@ -86,9 +78,7 @@ main = hakyllWith config $ do
            "pages/jasenmaksut.html", "pages/saannot.html"] $ \p ->
       match p $ do
         route setRoot
-        compile $ readPageCompiler
-            >>> addDefaultFields
-            >>> arr (setGitValues)
+        compile $ historyReadPageCompiler
             >>> requireA "menus/menu-yhteystiedot.html" (setFieldA "left" $ arr pageBody)
             >>> applyTemplateCompiler "templates/two-column.html"
             >>> applyTemplateCompiler "templates/template.html"
@@ -96,9 +86,7 @@ main = hakyllWith config $ do
 
     match "pages_gallery/*" $ do
         route setRoot
-        compile $ readPageCompiler
-            >>> addDefaultFields
-            >>> arr (setGitValues)
+        compile $ historyReadPageCompiler
             >>> requireA "menus/menu-muistoja.html" (setFieldA "left" $ arr pageBody)
             >>> applyTemplateCompiler "templates/two-column.html"
             >>> applyTemplateCompiler "templates/template.html"
@@ -107,9 +95,7 @@ main = hakyllWith config $ do
     -- CHANGES PAGES
     match "pages/muutokset.html" $ do
         route setRoot
-        compile $ readPageCompiler
-            >>> addDefaultFields
-            >>> arr (setGitValues)
+        compile $ historyReadPageCompiler
             >>> arr (setChanges)
             >>> requireA "menus/menu-yhteystiedot.html" (setFieldA "left" $ arr pageBody)
             >>> applyTemplateCompiler "templates/changes.html"
@@ -126,7 +112,12 @@ snippetCompiler :: Compiler Resource (Page String)
 snippetCompiler = readPageCompiler
   >>> addDefaultFields
   >>> arr applySelf
-  
+
+historyReadPageCompiler :: Compiler Resource (Page String)
+historyReadPageCompiler = readPageCompiler
+  >>> addDefaultFields
+  >>> arr (setGitValues)
+
 setRoot :: Routes
 setRoot = customRoute stripTopDir
 

@@ -37,6 +37,8 @@ nav li:nth-child(5) { background: url("../images/tikku-ukko1.png") no-repeat 0px
 .alkeiskurssi dl { margin: 20px 0 0 20px;}
 .alkeiskurssi dd { margin-left: 40px;}
 
+.ilmo label, .ilmo textarea { display: inline-block; width: 250px; vertical-align: top;}
+
 img.email { vertical-align: middle; padding-bottom: 2px; }
 
 .menu-galleries img { max-width: 70px; min-width: 70px; margin-right: 5px;}

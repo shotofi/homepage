@@ -66,7 +66,8 @@ main = hakyllWith config $ do
             >>> applyTemplateCompiler "templates/template.html"
             >>> relativizeUrlsCompiler
 
-    match "pages/alkeiskurssi.html" $ do
+    forM_ ["pages/alkeiskurssi.html", "pages/alkeiskurssi-ilmo.html", "pages/alkeiskurssi-ilmo-ok.html"] $ \p ->
+      match p $ do
         route setRoot
         compile $ historyReadPageCompiler
             >>> requireA "snippets/alkeiskurssi-ohjelma.html" (setFieldA "right" $ arr pageBody)

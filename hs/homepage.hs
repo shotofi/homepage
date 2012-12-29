@@ -74,12 +74,12 @@ main = hakyllWith config $ do
             >>> applyTemplateCompiler "templates/template.html"
             >>> relativizeUrlsCompiler
 
-    forM_ ["pages/yhteystiedot.html", "pages/muumaailma.html", "pages/karate_all.html",
+    forM_ ["pages/yhteystiedot.html", "pages/muutseurat.html", "pages/karate_all.html",
            "pages/jasenmaksut.html", "pages/saannot.html"] $ \p ->
       match p $ do
         route setRoot
         compile $ historyReadPageCompiler
-            >>> requireA "menus/menu-yhteystiedot.html" (setFieldA "left" $ arr pageBody)
+            >>> requireA "menus/menu-lisatietoa.html" (setFieldA "left" $ arr pageBody)
             >>> applyTemplateCompiler "templates/two-column.html"
             >>> applyTemplateCompiler "templates/template.html"
             >>> relativizeUrlsCompiler
@@ -97,7 +97,7 @@ main = hakyllWith config $ do
         route setRoot
         compile $ historyReadPageCompiler
             >>> arr (setChanges)
-            >>> requireA "menus/menu-yhteystiedot.html" (setFieldA "left" $ arr pageBody)
+            >>> requireA "menus/menu-lisatietoa.html" (setFieldA "left" $ arr pageBody)
             >>> applyTemplateCompiler "templates/changes.html"
             >>> applyTemplateCompiler "templates/two-column.html"
             >>> applyTemplateCompiler "templates/template.html"

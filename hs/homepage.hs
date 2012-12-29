@@ -46,7 +46,7 @@ main = hakyllWith config $ do
             >>> relativizeUrlsCompiler
 
     forM_ ["pages/harjoittelu.html", "pages/harjoittelupaikat.html", "pages/katat.html", "pages/perustekniikka.html",
-           "pages/graduointi.html", "pages/tyylikuvaus.html", "pages/lajinvalinta.html", "pages/muiden_harrastajat.html"] $ \p ->
+           "pages/graduointi.html", "pages/tyylikuvaus.html"] $ \p ->
       match p $ do
         route setRoot
         compile $ historyReadPageCompiler

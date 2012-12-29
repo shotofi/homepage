@@ -88,7 +88,7 @@ main = hakyllWith config $ do
         route setRoot
         compile $ historyReadPageCompiler
             >>> requireA "menus/menu-kuvia.html" (setFieldA "left" $ arr pageBody)
-            >>> applyTemplateCompiler "templates/two-column3.html"
+            >>> applyTemplateCompiler "templates/two-column.html"
             >>> applyTemplateCompiler "templates/template.html"
             >>> relativizeUrlsCompiler
 

@@ -39,7 +39,7 @@ main = hakyllWith config $ do
         compile $ historyReadPageCompiler
             >>> requireA "snippets/tapahtumakalenteri.html" (setFieldA "leftup" $ arr pageBody)
             >>> requireA "snippets/alkeiskurssi-mainos.html" (setFieldA "leftdown" $ arr pageBody)
-            >>> requireA "snippets/harjoitusajat.html" (setFieldA "rightup" $ arr pageBody)
+            >>> requireA "snippets/harjoitusajat-mainos.html" (setFieldA "rightup" $ arr pageBody)
             >>> arr (setField "rightdown" "")
             >>> applyTemplateCompiler "templates/three-column.html"
             >>> applyTemplateCompiler "templates/template.html"

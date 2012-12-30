@@ -41,9 +41,7 @@ main = hakyllWith config $ do
             >>> requireA "snippets/alkeiskurssi-mainos.html" (setFieldA "leftdown" $ arr pageBody)
             >>> requireA "snippets/harjoitusajat-mainos.html" (setFieldA "rightup" $ arr pageBody)
             >>> arr (setField "rightdown" "")
-            >>> applyTemplateCompiler "templates/three-column.html"
-            >>> applyTemplateCompiler "templates/template.html"
-            >>> relativizeUrlsCompiler
+            >>> fiThreeColumnCompiler
 
     forM_ ["pages/harjoittelu.html", "pages/harjoittelupaikat.html", "pages/katat.html", "pages/perustekniikka.html",
            "pages/salietiketti.html", "pages/graduointi.html", "pages/tyylikuvaus.html"] $ \p ->
@@ -51,9 +49,7 @@ main = hakyllWith config $ do
         route setRoot
         compile $ historyReadPageCompiler
             >>> requireA "menus/menu-harjoittelu.html" (setFieldA "left" $ arr pageBody)
-            >>> applyTemplateCompiler "templates/two-column.html"
-            >>> applyTemplateCompiler "templates/template.html"
-            >>> relativizeUrlsCompiler
+            >>> fiTwoColumnCompiler
 
     match "pages/leirit.html" $ do
         route setRoot
@@ -62,18 +58,14 @@ main = hakyllWith config $ do
             >>> requireA "snippets/leirit-mainos.html" (setFieldA "rightup" $ arr pageBody)
             >>> arr (setField "leftdown" "")
             >>> arr (setField "rightdown" "")
-            >>> applyTemplateCompiler "templates/three-column.html"
-            >>> applyTemplateCompiler "templates/template.html"
-            >>> relativizeUrlsCompiler
+            >>> fiThreeColumnCompiler
 
     forM_ ["pages/alkeiskurssi.html", "pages/alkeiskurssi-ilmo.html", "pages/alkeiskurssi-ilmo-ok.html"] $ \p ->
       match p $ do
         route setRoot
         compile $ historyReadPageCompiler
             >>> requireA "snippets/alkeiskurssi-ohjelma.html" (setFieldA "right" $ arr pageBody)
-            >>> applyTemplateCompiler "templates/two-column2.html"
-            >>> applyTemplateCompiler "templates/template.html"
-            >>> relativizeUrlsCompiler
+            >>> fiTwoColumnRightCompiler
 
     forM_ ["pages/yhteystiedot.html", "pages/muutseurat.html", "pages/karate_all.html",
            "pages/jasenmaksut.html", "pages/saannot.html"] $ \p ->
@@ -81,17 +73,15 @@ main = hakyllWith config $ do
         route setRoot
         compile $ historyReadPageCompiler
             >>> requireA "menus/menu-lisatietoa.html" (setFieldA "left" $ arr pageBody)
-            >>> applyTemplateCompiler "templates/two-column.html"
-            >>> applyTemplateCompiler "templates/template.html"
-            >>> relativizeUrlsCompiler
+            >>> fiTwoColumnCompiler
 
-    match "pages_gallery/*" $ do
+    forM_ ["pages_gallery/kuvia.html", "pages_gallery/kuvia_07.html", "pages_gallery/kuvia_08.html",
+           "pages_gallery/kuvia_09.html"] $ \p ->
+      match p $ do
         route setRoot
         compile $ historyReadPageCompiler
             >>> requireA "menus/menu-kuvia.html" (setFieldA "left" $ arr pageBody)
-            >>> applyTemplateCompiler "templates/two-column.html"
-            >>> applyTemplateCompiler "templates/template.html"
-            >>> relativizeUrlsCompiler
+            >>> fiTwoColumnCompiler
 
     -- CHANGES PAGES
     match "pages/muutokset.html" $ do
@@ -100,9 +90,7 @@ main = hakyllWith config $ do
             >>> arr (setChanges)
             >>> requireA "menus/menu-lisatietoa.html" (setFieldA "left" $ arr pageBody)
             >>> applyTemplateCompiler "templates/changes.html"
-            >>> applyTemplateCompiler "templates/two-column.html"
-            >>> applyTemplateCompiler "templates/template.html"
-            >>> relativizeUrlsCompiler
+            >>> fiTwoColumnCompiler
 
 config :: HakyllConfiguration
 config = defaultHakyllConfiguration
@@ -118,6 +106,21 @@ historyReadPageCompiler :: Compiler Resource (Page String)
 historyReadPageCompiler = readPageCompiler
   >>> addDefaultFields
   >>> arr (setGitValues)
+
+fiTwoColumnCompiler :: Compiler (Page String) (Page String)
+fiTwoColumnCompiler = applyTemplateCompiler "templates/two-column.html"
+  >>> applyTemplateCompiler "templates/template.html"
+  >>> relativizeUrlsCompiler
+
+fiTwoColumnRightCompiler :: Compiler (Page String) (Page String)
+fiTwoColumnRightCompiler = applyTemplateCompiler "templates/two-column2.html"
+  >>> applyTemplateCompiler "templates/template.html"
+  >>> relativizeUrlsCompiler
+
+fiThreeColumnCompiler :: Compiler (Page String) (Page String)
+fiThreeColumnCompiler = applyTemplateCompiler "templates/three-column.html"
+  >>> applyTemplateCompiler "templates/template.html"
+  >>> relativizeUrlsCompiler
 
 setRoot :: Routes
 setRoot = customRoute stripTopDir

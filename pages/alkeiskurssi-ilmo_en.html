@@ -1,0 +1,33 @@
+---
+title: Ilmoittautu alkeiskurssille
+breadcrumb: Alkeiskurssi > Ilmoittaudu alkeiskurssille
+---
+
+<section class="alkeiskurssi">
+  <header>
+    <h2>ILMOITTAUDU ALKEISKURSSILLE</h2>
+  </header>
+
+  <p>
+    Ilmoittaudu alkeiskurssille täyttämällä oheiset kentät. Sähköpostiosoitteesi lisätään seuran sähköpostilistalle, jolla
+    tiedotetaan harjoituksiin liittyvistä asioista.
+  </p>
+
+  <form class="ilmo" action="http://shoto.fi/cgi-sys/FormMail.cgi">
+    <input type="hidden" name="recipient" value="alkeiskurssi-test@shoto.fi" />
+    <input type="hidden" name="subject" value="Ilmoittautuminen alkeiskurssille" />
+    <input type=hidden name="required" value="realname,email">
+    <input type=hidden name="redirect" value="http://test.shoto.fi/alkeiskurssi-ilmo-ok.html">
+
+    <label for="realname">Nimesi *</label> <input type="text" id="realname" name="realname" maxlength="255" /><br>
+
+    <label for="email">Sähköpostiosoiteesi *</label> <input type="text" id="email" name="email" maxlength="255" /><br/>
+
+    <label for="info">Muuta tietoa</label> <textarea id="info" name="info" rows="5" cols="80"></textarea><br/>
+
+    <input type="submit" name="submit" value="Ilmoittaudu">
+
+  </form>
+
+
+</section>

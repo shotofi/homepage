@@ -14,10 +14,6 @@ main = hakyllWith config $ do
         route   idRoute
         compile copyFileCompiler
 
-    match "gallery/**" $ do
-        route   idRoute
-        compile copyFileCompiler
- 
     match "pdf/*" $ do
         route   idRoute
         compile copyFileCompiler
@@ -75,8 +71,7 @@ main = hakyllWith config $ do
             >>> requireA "menus/menu-lisatietoa.html" (setFieldA "left" $ arr pageBody)
             >>> fiTwoColumnCompiler
 
-    forM_ ["pages_gallery/kuvia.html", "pages_gallery/kuvia_07.html", "pages_gallery/kuvia_08.html",
-           "pages_gallery/kuvia_09.html"] $ \p ->
+    forM_ ["pages/kuvia.html", "pages/kuvia_07.html", "pages/kuvia_08.html", "pages/kuvia_09.html"] $ \p ->
       match p $ do
         route setRoot
         compile $ historyReadPageCompiler
@@ -136,4 +131,4 @@ setGitValues' page = liftM (setUpdated page) $ (gitDate $ getField "path" page)
   where setUpdated page date = setField "updated" date page
   
 setChanges :: Page a -> Page a
-setChanges page = setField "changes" (unsafePerformIO $ pageChanges ["pages", "pages_gallery"]) $ page
+setChanges page = setField "changes" (unsafePerformIO $ pageChanges ["pages"]) $ page

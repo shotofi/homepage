@@ -1,17 +1,13 @@
-Static homepage in Haskell.
+Karate Club Shoto's homepage.
+
+Static site generated with Haskell/Hakyll using layout from http://html5up.net/.
+
+Hakyll geration borrows code from Hakyll's example projects.
 
 
-TODO: 
-Vaihtuva kuva sivun yläosassa
-muutokset-sivu automaattisesti
-w3c-validaatiologot
+NoteToSelf:
 
 
-Sähköpostikuvat osoitteesta: http://chxo.com/labelgen/
+Email picture images from : http://chxo.com/labelgen/
 Gradienttituunaus: http://gradients.glrzad.com/
-
-Thanks
-======
-
-https://github.com/altercation/ethanschoonover.com
 

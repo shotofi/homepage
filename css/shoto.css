@@ -23,6 +23,8 @@ nav li:nth-child(5) { background: url("../images/tikku-ukko1.png") no-repeat 0px
 .tapahtumakalenteri span { display: inline-block; margin-right: 10px; font-weight: bold; }
 .alkeiskurssi-mainos strong { font-weight: bold; }
 
+.flexslider.right { float: right; width: 500px; }
+.harjoittelu.harjoistusajat  { min-height:  650px !important; }
 .harjoittelu .harjoitusajat-list { margin-left: 20px; }
 .harjoittelu .harjoitusajat-list ul { margin-left: 20px; }
 .harjoittelu .harjoitusajat-list li { list-style: disc outside; }

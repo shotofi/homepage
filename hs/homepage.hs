@@ -147,7 +147,7 @@ main = hakyllWith config $ do
 
 config :: HakyllConfiguration
 config = defaultHakyllConfiguration
-  { deployCommand = "scp -r _site/* shotofi@shoto.fi:public_html_test/"
+  { deployCommand = "scp -r _site/* shotofi@shoto.fi:public_html/"
   }
 
 snippetCompiler :: Compiler Resource (Page String)

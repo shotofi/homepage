@@ -16,16 +16,34 @@ breadcrumb: Beginner's Course > Register to beginner's course
   <form class="ilmo" action="http://shoto.fi/cgi-sys/FormMail.cgi">
     <input type="hidden" name="recipient" value="alkeiskurssi-test@shoto.fi" />
     <input type="hidden" name="subject" value="Ilmoittautuminen alkeiskurssille" />
-    <input type=hidden name="required" value="realname,email">
+    <input type=hidden name="required" value="realname,email,city,birthdate,status">
     <input type=hidden name="redirect" value="http://www.shoto.fi/alkeiskurssi-ilmo-ok.html">
 
     <label for="realname">Your name *</label> <input type="text" id="realname" name="realname" maxlength="255" /><br>
 
-    <label for="email">Your email</label> <input type="text" id="email" name="email" maxlength="255" /><br/>
+    <label for="email">Your email *</label> <input type="text" id="email" name="email" maxlength="255" /><br/>
+
+    <label for="city">Domicile *</label> <input type="text" id="city" name="city" maxlength="255" /><br/>
+
+    <label for="birthdate">Date of birth (dd.mmm.yyyy) *</label> <input type="text" id="birthdate" name="birthdate" maxlength="255" /><br/>
+
+    <label for="status">Student status *</label>
+    <select id="status" name="status">
+      <option value="Valitse...">Choose...</option>
+      <option value="perus-aalto">grad student Aalto</option>
+      <option value="perus-hy">grad student University of Helsinki</option>
+      <option value="jatko-aalto">post-grad student Aalto</option>
+      <option value="jatko-hy">post-grad student University of Helsinki</option>
+      <option value="henkilo-aalto">employee in Aalto</option>
+      <option value="henkilo-hy">employee in University of Helsinki</option>
+      <option value="opiskelu-muu">student in some other universicy / school</option>
+      <option value="muuta">not student or employee in Aalto / University of Helsinki</option>
+    </select>
+    <br/>
+
+    <label for="howto">How did you hear about our course?</label> <textarea id="howto" name="howto" rows="5" cols="80"></textarea><br/>
 
     <label for="info">Additional information</label> <textarea id="info" name="info" rows="5" cols="80"></textarea><br/>
-
-    <input type="submit" name="submit" value="Register">
 
   </form>
 

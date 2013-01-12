@@ -31,7 +31,8 @@ main = hakyllWith config $ do
     match "snippets/*"  $ compile snippetCompiler
 
     -- FINNISH SITE --
-    match "pages/index.html" $ do
+    forM_ ["pages/index.html", "pages/404.shtml"] $ \p ->
+      match p $ do
         route setRoot
         compile $ historyReadPageCompiler
             >>> requireA "snippets/tapahtumakalenteri.html" (setFieldA "leftup" $ arr pageBody)

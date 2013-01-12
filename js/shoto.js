@@ -41,7 +41,7 @@ $(window).load(function() {
   $('.flexslider').flexslider()
   var languageChanger = makeLanguageChanger()
 
-  $('#finnish').click(languageChanger.navigateToFinnishPage)
-  $('#english').click(languageChanger.navigateToEnglishPage)
+  $('.change-to-finnish').click(languageChanger.navigateToFinnishPage)
+  $('.change-to-english').click(languageChanger.navigateToEnglishPage)
 
 })

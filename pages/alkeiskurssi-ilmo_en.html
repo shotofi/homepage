@@ -10,11 +10,11 @@ breadcrumb: Beginner's Course > Register to beginner's course
 
   <p>
     Register to beginner's course by filling up the following form. Your email shall be added to our club's mailing
-    list, where information about practices is posted.
+    list, where information about training times, get-togethers and other events is posted.
   </p>
 
   <form class="ilmo" action="http://shoto.fi/cgi-sys/FormMail.cgi">
-    <input type="hidden" name="recipient" value="alkeiskurssi-test@shoto.fi" />
+    <input type="hidden" name="recipient" value="alkeiskurssi@shoto.fi" />
     <input type="hidden" name="subject" value="Ilmoittautuminen alkeiskurssille" />
     <input type=hidden name="required" value="realname,email,city,birthdate,status">
     <input type=hidden name="redirect" value="http://www.shoto.fi/alkeiskurssi-ilmo-ok_en.html">
@@ -25,18 +25,18 @@ breadcrumb: Beginner's Course > Register to beginner's course
 
     <label for="city">Domicile *</label> <input type="text" id="city" name="city" maxlength="255" /><br/>
 
-    <label for="birthdate">Date of birth (dd.mmm.yyyy) *</label> <input type="text" id="birthdate" name="birthdate" maxlength="255" /><br/>
+    <label for="birthdate">Date of birth (dd.mm.yyyy) *</label> <input type="text" id="birthdate" name="birthdate" maxlength="255" /><br/>
 
     <label for="status">Student status *</label>
     <select id="status" name="status">
       <option value="Valitse...">Choose...</option>
-      <option value="perus-aalto">grad student Aalto</option>
-      <option value="perus-hy">grad student University of Helsinki</option>
+      <option value="perus-aalto">undergraduate Aalto</option>
+      <option value="perus-hy">undergraduate University of Helsinki</option>
       <option value="jatko-aalto">post-grad student Aalto</option>
       <option value="jatko-hy">post-grad student University of Helsinki</option>
       <option value="henkilo-aalto">employee in Aalto</option>
       <option value="henkilo-hy">employee in University of Helsinki</option>
-      <option value="opiskelu-muu">student in some other universicy / school</option>
+      <option value="opiskelu-muu">student in some other university / school</option>
       <option value="muuta">not student or employee in Aalto / University of Helsinki</option>
     </select>
     <br/>
@@ -45,7 +45,7 @@ breadcrumb: Beginner's Course > Register to beginner's course
 
     <label for="info">Additional information</label> <textarea id="info" name="info" rows="5" cols="80"></textarea><br/>
 
-    <input type="submit" name="submit" value="Register to course">
+    <input type="submit" name="submit" value="Enroll to course">
 
   </form>
 

@@ -30,12 +30,11 @@ main = hakyllWith config $ do
           rightdown <- loadBody "snippets/empty.html"
           getResourceBody
             >>= loadAndApplyTemplate "templates/three-column.html"
-              (constField "leftup" leftup `mappend`
-                constField "leftdown" leftdown `mappend`
-                constField "rightup" rightup `mappend`
-                constField "rightdown" rightdown `mappend` defaultContext)
-            >>= loadAndApplyTemplate "templates/template.html" updatedCtx
-            >>= relativizeUrls
+              (fourSnippetCtx leftup leftdown rightup rightdown)
+            >>= fiTemplate
+
+fiTemplate :: Item String -> Compiler (Item String)
+fiTemplate item = loadAndApplyTemplate "templates/template.html" updatedCtx item >>= relativizeUrls
 
 updatedCtx :: Context String
 updatedCtx = mconcat
@@ -43,14 +42,14 @@ updatedCtx = mconcat
   , defaultContext
   ]
 
--- fourSnippetCtx :: String String String String String  -> Context String
---fourSnippetCtx p leftup leftdown rightup rightdown = mconcat
---    [ bodyField "mtime" "%U"
---    , dateField "date" "%B %e, %Y"
---    , "updated" p
---    , defaultContext
---    ]
-
+fourSnippetCtx :: String -> String -> String -> String -> Context String
+fourSnippetCtx leftup leftdown rightup rightdown = mconcat
+  [ constField "leftup" leftup
+  , constField "leftdown" leftdown
+  , constField "rightup" rightup
+  , constField "rightdown" rightdown
+  , defaultContext
+  ]
 
 
 {-|

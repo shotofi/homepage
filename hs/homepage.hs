@@ -11,27 +11,27 @@ import Git
 main :: IO ()
 main = hakyllWith config $ do
 
-    match ("images/**" .||. "pdf/*" .||. "js/**" .||. "css/**") $ do
-        route   idRoute
-        compile copyFileCompiler
+  match ("images/**" .||. "pdf/*" .||. "js/**" .||. "css/**") $ do
+    route   idRoute
+    compile copyFileCompiler
 
-    match "templates/*" $ compile $ templateCompiler
-    match "menus/*"     $ compile $ templateCompiler
-    match "snippets/*"  $ compile $ getResourceBody
+  match "templates/*" $ compile $ templateCompiler
+  match "menus/*"     $ compile $ templateCompiler
+  match "snippets/*"  $ compile $ getResourceBody
 
-    -- FINNISH SITE --
-    forM_ ["pages/index.html", "pages/404.shtml"] $ \p ->
-      match p $ do
-        route setRoot
-        compile $ do
-          leftup <- loadBody "snippets/tapahtumakalenteri.html"
-          leftdown <- loadBody "snippets/alkeiskurssi-mainos.html"
-          rightup <- loadBody "snippets/harjoitusajat-mainos.html"
-          rightdown <- loadBody "snippets/empty.html"
-          getResourceBody
-            >>= loadAndApplyTemplate "templates/three-column.html"
-              (fourSnippetCtx leftup leftdown rightup rightdown)
-            >>= fiTemplate
+  -- FINNISH SITE --
+  forM_ ["pages/index.html", "pages/404.shtml"] $ \p ->
+    match p $ do
+      route setRoot
+      compile $ do
+        leftup <- loadBody "snippets/tapahtumakalenteri.html"
+        leftdown <- loadBody "snippets/alkeiskurssi-mainos.html"
+        rightup <- loadBody "snippets/harjoitusajat-mainos.html"
+        rightdown <- loadBody "snippets/empty.html"
+        getResourceBody
+          >>= loadAndApplyTemplate "templates/three-column.html"
+            (fourSnippetCtx leftup leftdown rightup rightdown)
+          >>= fiTemplate
 
 fiTemplate :: Item String -> Compiler (Item String)
 fiTemplate item = loadAndApplyTemplate "templates/template.html" updatedCtx item >>= relativizeUrls

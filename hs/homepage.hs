@@ -1,34 +1,59 @@
+{-# LANGUAGE Arrows            #-}
 {-# LANGUAGE OverloadedStrings #-}
-import Control.Arrow (arr, (>>>))
+import Data.Monoid (mappend, mconcat)
 import System.FilePath
 import System.IO
 import System.IO.Unsafe (unsafePerformIO)
 import Control.Monad
 import Hakyll
-import Hakyll.Core.Compiler
 import Git
 
 main :: IO ()
 main = hakyllWith config $ do
-    match "images/**" $ do
+
+    match ("images/**" .||. "pdf/*" .||. "js/**" .||. "css/**") $ do
         route   idRoute
         compile copyFileCompiler
 
-    match "pdf/*" $ do
-        route   idRoute
-        compile copyFileCompiler
+    match "templates/*" $ compile $ templateCompiler
+    match "menus/*"     $ compile $ templateCompiler
+    match "snippets/*"  $ compile $ getResourceBody
 
-    match "js/**" $ do
-        route   idRoute
-        compile copyFileCompiler
+    -- FINNISH SITE --
+    forM_ ["pages/index.html", "pages/404.shtml"] $ \p ->
+      match p $ do
+        route setRoot
+        compile $ do
+          leftup <- loadBody "snippets/tapahtumakalenteri.html"
+          leftdown <- loadBody "snippets/alkeiskurssi-mainos.html"
+          rightup <- loadBody "snippets/harjoitusajat-mainos.html"
+          rightdown <- loadBody "snippets/empty.html"
+          getResourceBody
+            >>= loadAndApplyTemplate "templates/three-column.html"
+              (constField "leftup" leftup `mappend`
+                constField "leftdown" leftdown `mappend`
+                constField "rightup" rightup `mappend`
+                constField "rightdown" rightdown `mappend` defaultContext)
+            >>= loadAndApplyTemplate "templates/template.html" updatedCtx
+            >>= relativizeUrls
 
-    match "css/**" $ do
-        route   idRoute
-        compile copyFileCompiler
+updatedCtx :: Context String
+updatedCtx = mconcat
+  [ constField "updated" ""
+  , defaultContext
+  ]
 
-    match "templates/*" $ compile templateCompiler
-    match "menus/*"     $ compile snippetCompiler
-    match "snippets/*"  $ compile snippetCompiler
+-- fourSnippetCtx :: String String String String String  -> Context String
+--fourSnippetCtx p leftup leftdown rightup rightdown = mconcat
+--    [ bodyField "mtime" "%U"
+--    , dateField "date" "%B %e, %Y"
+--    , "updated" p
+--    , defaultContext
+--    ]
+
+
+
+{-|
 
     -- FINNISH SITE --
     forM_ ["pages/index.html", "pages/404.shtml"] $ \p ->
@@ -145,58 +170,70 @@ main = hakyllWith config $ do
             >>> applyTemplateCompiler "templates/changes_en.html"
             >>> enTwoColumnCompiler
 
-config :: HakyllConfiguration
-config = defaultHakyllConfiguration
+-}
+
+config :: Configuration
+config = defaultConfiguration
   { deployCommand = "scp -r _site/* shotofi@shoto.fi:public_html/"
   }
 
+
+{-
+
 snippetCompiler :: Compiler Resource (Page String)
 snippetCompiler = readPageCompiler
-  >>> addDefaultFields
-  >>> arr applySelf
+  >>= addDefaultFields
+  >>= arr applySelf
+
+
+
 
 historyReadPageCompiler :: Compiler Resource (Page String)
 historyReadPageCompiler = readPageCompiler
-  >>> addDefaultFields
-  >>> arr (setGitValues)
+  >>= addDefaultFields
+  >>= arr (setGitValues)
 
 -- Finnish compilers
 fiTwoColumnCompiler :: Compiler (Page String) (Page String)
-fiTwoColumnCompiler = applyTemplateCompiler "templates/two-column.html"
-  >>> applyTemplateCompiler "templates/template.html"
-  >>> relativizeUrlsCompiler
+fiTwoColumnCompiler = loadAndApplyTemplate "templates/two-column.html"
+  >>= loadAndApplyTemplate "templates/template.html"
+  >>= relativizeUrlsCompiler
 
 fiTwoColumnRightCompiler :: Compiler (Page String) (Page String)
-fiTwoColumnRightCompiler = applyTemplateCompiler "templates/two-column2.html"
-  >>> applyTemplateCompiler "templates/template.html"
-  >>> relativizeUrlsCompiler
+fiTwoColumnRightCompiler = loadAndApplyTemplate "templates/two-column2.html"
+  >>= loadAndApplyTemplate "templates/template.html"
+  >>= relativizeUrlsCompiler
 
 fiThreeColumnCompiler :: Compiler (Page String) (Page String)
-fiThreeColumnCompiler = applyTemplateCompiler "templates/three-column.html"
-  >>> applyTemplateCompiler "templates/template.html"
-  >>> relativizeUrlsCompiler
+fiThreeColumnCompiler = loadAndApplyTemplate "templates/three-column.html"
+  >>= loadAndApplyTemplate "templates/template.html"
+  >>= relativizeUrlsCompiler
 
 -- English compilers
 enTwoColumnCompiler :: Compiler (Page String) (Page String)
-enTwoColumnCompiler = applyTemplateCompiler "templates/two-column.html"
-  >>> applyTemplateCompiler "templates/template_en.html"
-  >>> relativizeUrlsCompiler
+enTwoColumnCompiler = loadAndApplyTemplate "templates/two-column.html"
+  >>= loadAndApplyTemplate "templates/template_en.html"
+  >>= relativizeUrlsCompiler
 
 enTwoColumnRightCompiler :: Compiler (Page String) (Page String)
-enTwoColumnRightCompiler = applyTemplateCompiler "templates/two-column2.html"
-  >>> applyTemplateCompiler "templates/template_en.html"
-  >>> relativizeUrlsCompiler
+enTwoColumnRightCompiler = loadAndApplyTemplate "templates/two-column2.html"
+  >>= loadAndApplyTemplate "templates/template_en.html"
+  >>= relativizeUrlsCompiler
 
 enThreeColumnCompiler :: Compiler (Page String) (Page String)
-enThreeColumnCompiler = applyTemplateCompiler "templates/three-column.html"
-  >>> applyTemplateCompiler "templates/template_en.html"
-  >>> relativizeUrlsCompiler
+enThreeColumnCompiler = loadAndApplyTemplate "templates/three-column.html"
+  >>= loadAndApplyTemplate "templates/template_en.html"
+  >>= relativizeUrlsCompiler
 
-setRoot :: Routes
+-}
+
+-- setRoot :: Routes
 setRoot = customRoute stripTopDir
 
-stripTopDir :: Identifier a -> FilePath
+-- stripTopDir :: Identifier a -> FilePath
 stripTopDir = joinPath . tail . splitPath . toFilePath
+
+{-
 
 setGitValues :: Page a -> Page a
 setGitValues page = setField "updated" (unsafePerformIO $ gitDate $ getField "path" page) $ page
@@ -204,6 +241,7 @@ setGitValues page = setField "updated" (unsafePerformIO $ gitDate $ getField "pa
 setGitValues' :: Page a -> IO (Page a)
 setGitValues' page = liftM (setUpdated page) $ (gitDate $ getField "path" page)
   where setUpdated page date = setField "updated" date page
-  
+
 setChanges :: Page a -> Page a
 setChanges page = setField "changes" (unsafePerformIO $ pageChanges ["pages"]) $ page
+-}

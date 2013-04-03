@@ -16,7 +16,7 @@ main = hakyllWith config $ do
     compile copyFileCompiler
 
   match "templates/*" $ compile $ templateCompiler
-  match "menus/*"     $ compile $ templateCompiler
+  match "menus/*"     $ compile $ getResourceBody
   match "snippets/*"  $ compile $ getResourceBody
 
   -- FINNISH SITE --
@@ -28,10 +28,31 @@ main = hakyllWith config $ do
         leftdown <- loadBody "snippets/alkeiskurssi-mainos.html"
         rightup <- loadBody "snippets/harjoitusajat-mainos.html"
         rightdown <- loadBody "snippets/empty.html"
+        let ctx = fourSnippetCtx leftup leftdown rightup rightdown
         getResourceBody
-          >>= loadAndApplyTemplate "templates/three-column.html"
-            (fourSnippetCtx leftup leftdown rightup rightdown)
+          >>= loadAndApplyTemplate "templates/three-column.html" ctx
           >>= fiTemplate
+
+  forM_ ["pages/harjoittelu.html", "pages/harjoittelupaikat.html", "pages/katat.html", "pages/perustekniikka.html",
+         "pages/salietiketti.html", "pages/graduointi.html", "pages/tyylikuvaus.html"] $ \p ->
+    match p $ do
+      route setRoot
+      compile $ do
+        menu <- loadBody "menus/menu-harjoittelu.html"
+        let ctx = leftCtx menu
+        getResourceBody
+          >>= loadAndApplyTemplate "templates/two-column.html" ctx
+          >>= fiTemplate
+
+  match "pages/leirit.html" $ do
+    route setRoot
+    compile $ do
+      menu <- loadBody "menus/menu-harjoittelu.html"
+      right <- loadBody "snippets/leirit-mainos.html"
+      let ctx = twoSnippetCtx menu right
+      getResourceBody
+        >>= loadAndApplyTemplate "templates/three-column.html" ctx
+        >>= fiTemplate
 
 fiTemplate :: Item String -> Compiler (Item String)
 fiTemplate item = loadAndApplyTemplate "templates/template.html" updatedCtx item >>= relativizeUrls
@@ -42,6 +63,9 @@ updatedCtx = mconcat
   , defaultContext
   ]
 
+twoSnippetCtx :: String -> String -> Context String
+twoSnippetCtx left right = fourSnippetCtx left "" right ""
+
 fourSnippetCtx :: String -> String -> String -> String -> Context String
 fourSnippetCtx leftup leftdown rightup rightdown = mconcat
   [ constField "leftup" leftup
@@ -51,36 +75,16 @@ fourSnippetCtx leftup leftdown rightup rightdown = mconcat
   , defaultContext
   ]
 
+leftCtx :: String -> Context String
+leftCtx left = mconcat
+  [ constField "left" left
+  , defaultContext
+  ]
+
 
 {-|
 
     -- FINNISH SITE --
-    forM_ ["pages/index.html", "pages/404.shtml"] $ \p ->
-      match p $ do
-        route setRoot
-        compile $ historyReadPageCompiler
-            >>> requireA "snippets/tapahtumakalenteri.html" (setFieldA "leftup" $ arr pageBody)
-            >>> requireA "snippets/alkeiskurssi-mainos.html" (setFieldA "leftdown" $ arr pageBody)
-            >>> requireA "snippets/harjoitusajat-mainos.html" (setFieldA "rightup" $ arr pageBody)
-            >>> arr (setField "rightdown" "")
-            >>> fiThreeColumnCompiler
-
-    forM_ ["pages/harjoittelu.html", "pages/harjoittelupaikat.html", "pages/katat.html", "pages/perustekniikka.html",
-           "pages/salietiketti.html", "pages/graduointi.html", "pages/tyylikuvaus.html"] $ \p ->
-      match p $ do
-        route setRoot
-        compile $ historyReadPageCompiler
-            >>> requireA "menus/menu-harjoittelu.html" (setFieldA "left" $ arr pageBody)
-            >>> fiTwoColumnCompiler
-
-    match "pages/leirit.html" $ do
-        route setRoot
-        compile $ historyReadPageCompiler
-            >>> requireA "menus/menu-harjoittelu.html" (setFieldA "leftup" $ arr pageBody)
-            >>> requireA "snippets/leirit-mainos.html" (setFieldA "rightup" $ arr pageBody)
-            >>> arr (setField "leftdown" "")
-            >>> arr (setField "rightdown" "")
-            >>> fiThreeColumnCompiler
 
     forM_ ["pages/alkeiskurssi.html", "pages/alkeiskurssi-ilmo.html", "pages/alkeiskurssi-ilmo-ok.html"] $ \p ->
       match p $ do

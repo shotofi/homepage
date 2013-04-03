@@ -54,6 +54,39 @@ main = hakyllWith config $ do
         >>= loadAndApplyTemplate "templates/three-column.html" ctx
         >>= fiTemplate
 
+  forM_ ["pages/alkeiskurssi.html", "pages/alkeiskurssi-ilmo.html", "pages/alkeiskurssi-ilmo-ok.html"] $ \p ->
+    match p $ do
+      route setRoot
+      compile $ do
+        right <- loadBody "snippets/alkeiskurssi-ohjelma.html"
+        let ctx = rightCtx right
+        getResourceBody
+          >>= loadAndApplyTemplate "templates/two-column2.html" ctx
+          >>= fiTemplate
+
+  forM_ ["pages/yhteystiedot.html", "pages/muutseurat.html", "pages/karate_all.html",
+         "pages/jasenmaksut.html", "pages/saannot.html"] $ \p ->
+    match p $ do
+      route setRoot
+      compile $ do
+        menu <- loadBody "menus/menu-lisatietoa.html"
+        let ctx = leftCtx menu
+        getResourceBody
+          >>= loadAndApplyTemplate "templates/two-column.html" ctx
+          >>= fiTemplate
+
+  forM_ ["pages/kuvia.html", "pages/kuvia_07.html", "pages/kuvia_08.html", "pages/kuvia_09.html"] $ \p ->
+    match p $ do
+      route setRoot
+      compile $ do
+        menu <- loadBody "menus/menu-kuvia.html"
+        let ctx = leftCtx menu
+        getResourceBody
+          >>= loadAndApplyTemplate "templates/two-column.html" ctx
+          >>= fiTemplate
+
+  -- ENGLISH SITE --
+
 fiTemplate :: Item String -> Compiler (Item String)
 fiTemplate item = loadAndApplyTemplate "templates/template.html" updatedCtx item >>= relativizeUrls
 
@@ -81,33 +114,15 @@ leftCtx left = mconcat
   , defaultContext
   ]
 
+rightCtx :: String -> Context String
+rightCtx right = mconcat
+  [ constField "right" right
+  , defaultContext
+  ]
 
 {-|
 
     -- FINNISH SITE --
-
-    forM_ ["pages/alkeiskurssi.html", "pages/alkeiskurssi-ilmo.html", "pages/alkeiskurssi-ilmo-ok.html"] $ \p ->
-      match p $ do
-        route setRoot
-        compile $ historyReadPageCompiler
-            >>> requireA "snippets/alkeiskurssi-ohjelma.html" (setFieldA "right" $ arr pageBody)
-            >>> fiTwoColumnRightCompiler
-
-    forM_ ["pages/yhteystiedot.html", "pages/muutseurat.html", "pages/karate_all.html",
-           "pages/jasenmaksut.html", "pages/saannot.html"] $ \p ->
-      match p $ do
-        route setRoot
-        compile $ historyReadPageCompiler
-            >>> requireA "menus/menu-lisatietoa.html" (setFieldA "left" $ arr pageBody)
-            >>> fiTwoColumnCompiler
-
-    forM_ ["pages/kuvia.html", "pages/kuvia_07.html", "pages/kuvia_08.html", "pages/kuvia_09.html"] $ \p ->
-      match p $ do
-        route setRoot
-        compile $ historyReadPageCompiler
-            >>> requireA "menus/menu-kuvia.html" (setFieldA "left" $ arr pageBody)
-            >>> fiTwoColumnCompiler
-
     match "pages/muutokset.html" $ do
         route setRoot
         compile $ historyReadPageCompiler

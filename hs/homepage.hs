@@ -28,10 +28,7 @@ main = hakyllWith config $ do
         leftdown <- loadBody "snippets/alkeiskurssi-mainos.html"
         rightup <- loadBody "snippets/harjoitusajat-mainos.html"
         rightdown <- loadBody "snippets/empty.html"
-        let ctx = fourSnippetCtx leftup leftdown rightup rightdown
-        getResourceBody
-          >>= loadAndApplyTemplate "templates/three-column.html" ctx
-          >>= fiTemplate
+        finnishThreeColumn $ fourSnippetCtx leftup leftdown rightup rightdown
 
   forM_ ["pages/harjoittelu.html", "pages/harjoittelupaikat.html", "pages/katat.html", "pages/perustekniikka.html",
          "pages/salietiketti.html", "pages/graduointi.html", "pages/tyylikuvaus.html"] $ \p ->
@@ -39,30 +36,21 @@ main = hakyllWith config $ do
       route setRoot
       compile $ do
         menu <- loadBody "menus/menu-harjoittelu.html"
-        let ctx = leftCtx menu
-        getResourceBody
-          >>= loadAndApplyTemplate "templates/two-column.html" ctx
-          >>= fiTemplate
+        finnishTwoColumnLeft $ leftCtx menu
 
   match "pages/leirit.html" $ do
     route setRoot
     compile $ do
       menu <- loadBody "menus/menu-harjoittelu.html"
       right <- loadBody "snippets/leirit-mainos.html"
-      let ctx = twoSnippetCtx menu right
-      getResourceBody
-        >>= loadAndApplyTemplate "templates/three-column.html" ctx
-        >>= fiTemplate
+      finnishThreeColumn $ twoSnippetCtx menu right
 
   forM_ ["pages/alkeiskurssi.html", "pages/alkeiskurssi-ilmo.html", "pages/alkeiskurssi-ilmo-ok.html"] $ \p ->
     match p $ do
       route setRoot
       compile $ do
         right <- loadBody "snippets/alkeiskurssi-ohjelma.html"
-        let ctx = rightCtx right
-        getResourceBody
-          >>= loadAndApplyTemplate "templates/two-column2.html" ctx
-          >>= fiTemplate
+        finnishTwoColumnRight $ rightCtx right
 
   forM_ ["pages/yhteystiedot.html", "pages/muutseurat.html", "pages/karate_all.html",
          "pages/jasenmaksut.html", "pages/saannot.html"] $ \p ->
@@ -70,22 +58,31 @@ main = hakyllWith config $ do
       route setRoot
       compile $ do
         menu <- loadBody "menus/menu-lisatietoa.html"
-        let ctx = leftCtx menu
-        getResourceBody
-          >>= loadAndApplyTemplate "templates/two-column.html" ctx
-          >>= fiTemplate
+        finnishTwoColumnLeft $ leftCtx menu
 
   forM_ ["pages/kuvia.html", "pages/kuvia_07.html", "pages/kuvia_08.html", "pages/kuvia_09.html"] $ \p ->
     match p $ do
       route setRoot
       compile $ do
         menu <- loadBody "menus/menu-kuvia.html"
-        let ctx = leftCtx menu
-        getResourceBody
-          >>= loadAndApplyTemplate "templates/two-column.html" ctx
-          >>= fiTemplate
+        finnishTwoColumnLeft $ leftCtx menu
 
   -- ENGLISH SITE --
+
+finnishThreeColumn ctx =
+  getResourceBody
+    >>= loadAndApplyTemplate "templates/three-column.html" ctx
+    >>= fiTemplate
+
+finnishTwoColumnLeft ctx =
+  getResourceBody
+    >>= loadAndApplyTemplate "templates/two-column.html" ctx
+    >>= fiTemplate
+
+finnishTwoColumnRight ctx =
+  getResourceBody
+    >>= loadAndApplyTemplate "templates/two-column2.html" ctx
+    >>= fiTemplate
 
 fiTemplate :: Item String -> Compiler (Item String)
 fiTemplate item = loadAndApplyTemplate "templates/template.html" updatedCtx item >>= relativizeUrls

@@ -145,7 +145,8 @@ applyTemplates columnTemplate pageTemplate ctx =
 
 updatedCtx :: Context String
 updatedCtx = mconcat
-  [ constField "updated" ""
+  [ field "updated" $ \item -> do
+      return $ unsafePerformIO $ gitDate $ toFilePath $ itemIdentifier item
   , defaultContext
   ]
 
@@ -205,12 +206,6 @@ stripTopDir :: Identifier -> FilePath
 stripTopDir = joinPath . tail . splitPath . toFilePath
 
 {-
-setGitValues :: Page a -> Page a
-setGitValues page = setField "updated" (unsafePerformIO $ gitDate $ getField "path" page) $ page
-
-setGitValues' :: Page a -> IO (Page a)
-setGitValues' page = liftM (setUpdated page) $ (gitDate $ getField "path" page)
-  where setUpdated page date = setField "updated" date page
 
 setChanges :: Page a -> Page a
 setChanges page = setField "changes" (unsafePerformIO $ pageChanges ["pages"]) $ page

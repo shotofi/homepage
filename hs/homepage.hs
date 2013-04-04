@@ -28,7 +28,7 @@ main = hakyllWith config $ do
         leftdown <- loadBody "snippets/alkeiskurssi-mainos.html"
         rightup <- loadBody "snippets/harjoitusajat-mainos.html"
         rightdown <- loadBody "snippets/empty.html"
-        finnishThreeColumn $ fourSnippetCtx leftup leftdown rightup rightdown
+        fiThreeColumn $ fourSnippetCtx leftup leftdown rightup rightdown
 
   forM_ ["pages/harjoittelu.html", "pages/harjoittelupaikat.html", "pages/katat.html", "pages/perustekniikka.html",
          "pages/salietiketti.html", "pages/graduointi.html", "pages/tyylikuvaus.html"] $ \p ->
@@ -36,21 +36,21 @@ main = hakyllWith config $ do
       route setRoot
       compile $ do
         menu <- loadBody "menus/menu-harjoittelu.html"
-        finnishTwoColumnLeft $ leftCtx menu
+        fiTwoColumnLeft $ leftCtx menu
 
   match "pages/leirit.html" $ do
     route setRoot
     compile $ do
       menu <- loadBody "menus/menu-harjoittelu.html"
       right <- loadBody "snippets/leirit-mainos.html"
-      finnishThreeColumn $ twoSnippetCtx menu right
+      fiThreeColumn $ twoSnippetCtx menu right
 
   forM_ ["pages/alkeiskurssi.html", "pages/alkeiskurssi-ilmo.html", "pages/alkeiskurssi-ilmo-ok.html"] $ \p ->
     match p $ do
       route setRoot
       compile $ do
         right <- loadBody "snippets/alkeiskurssi-ohjelma.html"
-        finnishTwoColumnRight $ rightCtx right
+        fiTwoColumnRight $ rightCtx right
 
   forM_ ["pages/yhteystiedot.html", "pages/muutseurat.html", "pages/karate_all.html",
          "pages/jasenmaksut.html", "pages/saannot.html"] $ \p ->
@@ -58,34 +58,48 @@ main = hakyllWith config $ do
       route setRoot
       compile $ do
         menu <- loadBody "menus/menu-lisatietoa.html"
-        finnishTwoColumnLeft $ leftCtx menu
+        fiTwoColumnLeft $ leftCtx menu
 
   forM_ ["pages/kuvia.html", "pages/kuvia_07.html", "pages/kuvia_08.html", "pages/kuvia_09.html"] $ \p ->
     match p $ do
       route setRoot
       compile $ do
         menu <- loadBody "menus/menu-kuvia.html"
-        finnishTwoColumnLeft $ leftCtx menu
+        fiTwoColumnLeft $ leftCtx menu
 
   -- ENGLISH SITE --
 
-finnishThreeColumn ctx =
-  getResourceBody
-    >>= loadAndApplyTemplate "templates/three-column.html" ctx
-    >>= fiTemplate
 
-finnishTwoColumnLeft ctx =
-  getResourceBody
-    >>= loadAndApplyTemplate "templates/two-column.html" ctx
-    >>= fiTemplate
+-- TEMPLATES --
+fiThreeColumn :: Context String -> Compiler (Item String)
+fiThreeColumn = applyTemplates "templates/three-column.html" fiTemplate
 
-finnishTwoColumnRight ctx =
+fiTwoColumnLeft :: Context String -> Compiler (Item String)
+fiTwoColumnLeft = applyTemplates "templates/two-column.html" fiTemplate
+
+fiTwoColumnRight :: Context String -> Compiler (Item String)
+fiTwoColumnRight = applyTemplates "templates/two-column2.html" fiTemplate
+
+enThreeColumn :: Context String -> Compiler (Item String)
+enThreeColumn = applyTemplates "templates/three-column.html" enTemplate
+
+enTwoColumnLeft :: Context String -> Compiler (Item String)
+enTwoColumnLeft = applyTemplates "templates/two-column.html" enTemplate
+
+enTwoColumnRight :: Context String -> Compiler (Item String)
+enTwoColumnRight = applyTemplates "templates/two-column2.html" enTemplate
+
+applyTemplates :: Identifier -> (Item String -> Compiler (Item String)) -> Context String -> Compiler (Item String)
+applyTemplates columnTemplate pageTemplate ctx =
   getResourceBody
-    >>= loadAndApplyTemplate "templates/two-column2.html" ctx
-    >>= fiTemplate
+    >>= loadAndApplyTemplate columnTemplate ctx
+    >>= pageTemplate
 
 fiTemplate :: Item String -> Compiler (Item String)
 fiTemplate item = loadAndApplyTemplate "templates/template.html" updatedCtx item >>= relativizeUrls
+
+enTemplate :: Item String -> Compiler (Item String)
+enTemplate item = loadAndApplyTemplate "templates/template_en.html" updatedCtx item >>= relativizeUrls
 
 updatedCtx :: Context String
 updatedCtx = mconcat

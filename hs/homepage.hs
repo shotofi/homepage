@@ -27,8 +27,7 @@ main = hakyllWith config $ do
         leftup <- loadBody "snippets/tapahtumakalenteri.html"
         leftdown <- loadBody "snippets/alkeiskurssi-mainos.html"
         rightup <- loadBody "snippets/harjoitusajat-mainos.html"
-        rightdown <- loadBody "snippets/empty.html"
-        fiThreeColumn $ fourSnippetCtx leftup leftdown rightup rightdown
+        fiThreeColumn $ fourSnippetCtx leftup leftdown rightup ""
 
   forM_ ["pages/harjoittelu.html", "pages/harjoittelupaikat.html", "pages/katat.html", "pages/perustekniikka.html",
          "pages/salietiketti.html", "pages/graduointi.html", "pages/tyylikuvaus.html"] $ \p ->
@@ -68,9 +67,52 @@ main = hakyllWith config $ do
         fiTwoColumnLeft $ leftCtx menu
 
   -- ENGLISH SITE --
+  forM_ ["pages/index_en.html"] $ \p ->
+    match p $ do
+      route setRoot
+      compile $ do
+        leftup <- loadBody "snippets/tapahtumakalenteri_en.html"
+        leftdown <- loadBody "snippets/alkeiskurssi-mainos_en.html"
+        rightup <- loadBody "snippets/harjoitusajat-mainos_en.html"
+        enThreeColumn $ fourSnippetCtx leftup leftdown rightup ""
 
+  forM_ ["pages/harjoittelu_en.html", "pages/harjoittelupaikat_en.html", "pages/katat_en.html", "pages/perustekniikka_en.html",
+         "pages/salietiketti_en.html", "pages/graduointi_en.html", "pages/tyylikuvaus_en.html"] $ \p ->
+    match p $ do
+      route setRoot
+      compile $ do
+        menu <- loadBody "menus/menu-harjoittelu_en.html"
+        enTwoColumnLeft $ leftCtx menu
 
--- TEMPLATES --
+  match "pages/leirit_en.html" $ do
+    route setRoot
+    compile $ do
+      menu <- loadBody "menus/menu-harjoittelu_en.html"
+      right <- loadBody "snippets/leirit-mainos_en.html"
+      enThreeColumn $ twoSnippetCtx menu right
+
+  forM_ ["pages/alkeiskurssi_en.html", "pages/alkeiskurssi-ilmo_en.html", "pages/alkeiskurssi-ilmo-ok_en.html"] $ \p ->
+    match p $ do
+      route setRoot
+      compile $ do
+        right <- loadBody "snippets/alkeiskurssi-ohjelma_en.html"
+        enTwoColumnRight $ rightCtx right
+
+  forM_ ["pages/yhteystiedot_en.html", "pages/muutseurat_en.html", "pages/karate_all_en.html",
+         "pages/jasenmaksut_en.html", "pages/saannot_en.html"] $ \p ->
+    match p $ do
+      route setRoot
+      compile $ do
+        menu <- loadBody "menus/menu-lisatietoa_en.html"
+        enTwoColumnLeft $ leftCtx menu
+
+  forM_ ["pages/kuvia_en.html", "pages/kuvia_07_en.html", "pages/kuvia_08_en.html", "pages/kuvia_09_en.html"] $ \p ->
+    match p $ do
+      route setRoot
+      compile $ do
+        menu <- loadBody "menus/menu-kuvia_en.html"
+        enTwoColumnLeft $ leftCtx menu
+
 fiThreeColumn :: Context String -> Compiler (Item String)
 fiThreeColumn = applyTemplates "templates/three-column.html" fiTemplate
 
@@ -89,17 +131,17 @@ enTwoColumnLeft = applyTemplates "templates/two-column.html" enTemplate
 enTwoColumnRight :: Context String -> Compiler (Item String)
 enTwoColumnRight = applyTemplates "templates/two-column2.html" enTemplate
 
-applyTemplates :: Identifier -> (Item String -> Compiler (Item String)) -> Context String -> Compiler (Item String)
-applyTemplates columnTemplate pageTemplate ctx =
-  getResourceBody
-    >>= loadAndApplyTemplate columnTemplate ctx
-    >>= pageTemplate
-
 fiTemplate :: Item String -> Compiler (Item String)
 fiTemplate item = loadAndApplyTemplate "templates/template.html" updatedCtx item >>= relativizeUrls
 
 enTemplate :: Item String -> Compiler (Item String)
 enTemplate item = loadAndApplyTemplate "templates/template_en.html" updatedCtx item >>= relativizeUrls
+
+applyTemplates :: Identifier -> (Item String -> Compiler (Item String)) -> Context String -> Compiler (Item String)
+applyTemplates columnTemplate pageTemplate ctx =
+  getResourceBody
+    >>= loadAndApplyTemplate columnTemplate ctx
+    >>= pageTemplate
 
 updatedCtx :: Context String
 updatedCtx = mconcat
@@ -132,7 +174,6 @@ rightCtx right = mconcat
   ]
 
 {-|
-
     -- FINNISH SITE --
     match "pages/muutokset.html" $ do
         route setRoot
@@ -143,54 +184,6 @@ rightCtx right = mconcat
             >>> fiTwoColumnCompiler
 
     -- ENGLISH SITE --
-    match "pages/index_en.html" $ do
-        route setRoot
-        compile $ historyReadPageCompiler
-            >>> requireA "snippets/tapahtumakalenteri_en.html" (setFieldA "leftup" $ arr pageBody)
-            >>> requireA "snippets/alkeiskurssi-mainos_en.html" (setFieldA "leftdown" $ arr pageBody)
-            >>> requireA "snippets/harjoitusajat-mainos_en.html" (setFieldA "rightup" $ arr pageBody)
-            >>> arr (setField "rightdown" "")
-            >>> enThreeColumnCompiler
-
-    forM_ ["pages/harjoittelu_en.html", "pages/harjoittelupaikat_en.html", "pages/katat_en.html", "pages/perustekniikka_en.html",
-           "pages/salietiketti_en.html", "pages/graduointi_en.html", "pages/tyylikuvaus_en.html"] $ \p ->
-      match p $ do
-        route setRoot
-        compile $ historyReadPageCompiler
-            >>> requireA "menus/menu-harjoittelu_en.html" (setFieldA "left" $ arr pageBody)
-            >>> enTwoColumnCompiler
-
-    match "pages/leirit_en.html" $ do
-        route setRoot
-        compile $ historyReadPageCompiler
-            >>> requireA "menus/menu-harjoittelu_en.html" (setFieldA "leftup" $ arr pageBody)
-            >>> requireA "snippets/leirit-mainos_en.html" (setFieldA "rightup" $ arr pageBody)
-            >>> arr (setField "leftdown" "")
-            >>> arr (setField "rightdown" "")
-            >>> enThreeColumnCompiler
-
-    forM_ ["pages/alkeiskurssi_en.html", "pages/alkeiskurssi-ilmo_en.html", "pages/alkeiskurssi-ilmo-ok_en.html"] $ \p ->
-      match p $ do
-        route setRoot
-        compile $ historyReadPageCompiler
-            >>> requireA "snippets/alkeiskurssi-ohjelma_en.html" (setFieldA "right" $ arr pageBody)
-            >>> enTwoColumnRightCompiler
-
-    forM_ ["pages/yhteystiedot_en.html", "pages/muutseurat_en.html", "pages/karate_all_en.html",
-           "pages/jasenmaksut_en.html", "pages/saannot_en.html"] $ \p ->
-      match p $ do
-        route setRoot
-        compile $ historyReadPageCompiler
-            >>> requireA "menus/menu-lisatietoa_en.html" (setFieldA "left" $ arr pageBody)
-            >>> enTwoColumnCompiler
-
-    forM_ ["pages/kuvia_en.html", "pages/kuvia_07_en.html", "pages/kuvia_08_en.html", "pages/kuvia_09_en.html"] $ \p ->
-      match p $ do
-        route setRoot
-        compile $ historyReadPageCompiler
-            >>> requireA "menus/menu-kuvia_en.html" (setFieldA "left" $ arr pageBody)
-            >>> enTwoColumnCompiler
-
     match "pages/muutokset_en.html" $ do
         route setRoot
         compile $ historyReadPageCompiler
@@ -198,63 +191,12 @@ rightCtx right = mconcat
             >>> requireA "menus/menu-lisatietoa_en.html" (setFieldA "left" $ arr pageBody)
             >>> applyTemplateCompiler "templates/changes_en.html"
             >>> enTwoColumnCompiler
-
 -}
 
 config :: Configuration
 config = defaultConfiguration
   { deployCommand = "scp -r _site/* shotofi@shoto.fi:public_html/"
   }
-
-
-{-
-
-snippetCompiler :: Compiler Resource (Page String)
-snippetCompiler = readPageCompiler
-  >>= addDefaultFields
-  >>= arr applySelf
-
-
-
-
-historyReadPageCompiler :: Compiler Resource (Page String)
-historyReadPageCompiler = readPageCompiler
-  >>= addDefaultFields
-  >>= arr (setGitValues)
-
--- Finnish compilers
-fiTwoColumnCompiler :: Compiler (Page String) (Page String)
-fiTwoColumnCompiler = loadAndApplyTemplate "templates/two-column.html"
-  >>= loadAndApplyTemplate "templates/template.html"
-  >>= relativizeUrlsCompiler
-
-fiTwoColumnRightCompiler :: Compiler (Page String) (Page String)
-fiTwoColumnRightCompiler = loadAndApplyTemplate "templates/two-column2.html"
-  >>= loadAndApplyTemplate "templates/template.html"
-  >>= relativizeUrlsCompiler
-
-fiThreeColumnCompiler :: Compiler (Page String) (Page String)
-fiThreeColumnCompiler = loadAndApplyTemplate "templates/three-column.html"
-  >>= loadAndApplyTemplate "templates/template.html"
-  >>= relativizeUrlsCompiler
-
--- English compilers
-enTwoColumnCompiler :: Compiler (Page String) (Page String)
-enTwoColumnCompiler = loadAndApplyTemplate "templates/two-column.html"
-  >>= loadAndApplyTemplate "templates/template_en.html"
-  >>= relativizeUrlsCompiler
-
-enTwoColumnRightCompiler :: Compiler (Page String) (Page String)
-enTwoColumnRightCompiler = loadAndApplyTemplate "templates/two-column2.html"
-  >>= loadAndApplyTemplate "templates/template_en.html"
-  >>= relativizeUrlsCompiler
-
-enThreeColumnCompiler :: Compiler (Page String) (Page String)
-enThreeColumnCompiler = loadAndApplyTemplate "templates/three-column.html"
-  >>= loadAndApplyTemplate "templates/template_en.html"
-  >>= relativizeUrlsCompiler
-
--}
 
 -- setRoot :: Routes
 setRoot = customRoute stripTopDir
@@ -263,7 +205,6 @@ setRoot = customRoute stripTopDir
 stripTopDir = joinPath . tail . splitPath . toFilePath
 
 {-
-
 setGitValues :: Page a -> Page a
 setGitValues page = setField "updated" (unsafePerformIO $ gitDate $ getField "path" page) $ page
 

@@ -66,6 +66,14 @@ main = hakyllWith config $ do
         menu <- loadBody "menus/menu-kuvia.html"
         fiTwoColumnLeft $ leftCtx menu
 
+  match "pages/muutokset.html" $ do
+    route setRoot
+    compile $ do
+      menu <- loadBody "menus/menu-lisatietoa.html"
+      let changes = unsafePerformIO $ pageChanges ["pages"]
+      let ctx = mconcat [constField "left" menu, constField "changes" changes, defaultContext]
+      applyTemplates "templates/changes.html" fiTemplate ctx
+
   -- ENGLISH SITE --
   forM_ ["pages/index_en.html"] $ \p ->
     match p $ do
@@ -112,6 +120,15 @@ main = hakyllWith config $ do
       compile $ do
         menu <- loadBody "menus/menu-kuvia_en.html"
         enTwoColumnLeft $ leftCtx menu
+
+  match "pages/muutokset_en.html" $ do
+    route setRoot
+    compile $ do
+      menu <- loadBody "menus/menu-lisatietoa_en.html"
+      let changes = unsafePerformIO $ pageChanges ["pages"]
+      let ctx = mconcat [constField "left" menu, constField "changes" changes, defaultContext]
+      applyTemplates "templates/changes_en.html" fiTemplate ctx
+
 
 fiThreeColumn :: Context String -> Compiler (Item String)
 fiThreeColumn = applyTemplates "templates/three-column.html" fiTemplate
@@ -163,36 +180,10 @@ fourSnippetCtx leftup leftdown rightup rightdown = mconcat
   ]
 
 leftCtx :: String -> Context String
-leftCtx left = mconcat
-  [ constField "left" left
-  , defaultContext
-  ]
+leftCtx left = mconcat [constField "left" left, defaultContext]
 
 rightCtx :: String -> Context String
-rightCtx right = mconcat
-  [ constField "right" right
-  , defaultContext
-  ]
-
-{-|
-    -- FINNISH SITE --
-    match "pages/muutokset.html" $ do
-        route setRoot
-        compile $ historyReadPageCompiler
-            >>> arr (setChanges)
-            >>> requireA "menus/menu-lisatietoa.html" (setFieldA "left" $ arr pageBody)
-            >>> applyTemplateCompiler "templates/changes.html"
-            >>> fiTwoColumnCompiler
-
-    -- ENGLISH SITE --
-    match "pages/muutokset_en.html" $ do
-        route setRoot
-        compile $ historyReadPageCompiler
-            >>> arr (setChanges)
-            >>> requireA "menus/menu-lisatietoa_en.html" (setFieldA "left" $ arr pageBody)
-            >>> applyTemplateCompiler "templates/changes_en.html"
-            >>> enTwoColumnCompiler
--}
+rightCtx right = mconcat [constField "right" right, defaultContext]
 
 config :: Configuration
 config = defaultConfiguration
@@ -204,9 +195,3 @@ setRoot = customRoute stripTopDir
 
 stripTopDir :: Identifier -> FilePath
 stripTopDir = joinPath . tail . splitPath . toFilePath
-
-{-
-
-setChanges :: Page a -> Page a
-setChanges page = setField "changes" (unsafePerformIO $ pageChanges ["pages"]) $ page
--}

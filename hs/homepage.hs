@@ -198,10 +198,10 @@ config = defaultConfiguration
   { deployCommand = "scp -r _site/* shotofi@shoto.fi:public_html/"
   }
 
--- setRoot :: Routes
+setRoot :: Routes
 setRoot = customRoute stripTopDir
 
--- stripTopDir :: Identifier a -> FilePath
+stripTopDir :: Identifier -> FilePath
 stripTopDir = joinPath . tail . splitPath . toFilePath
 
 {-

@@ -5,3 +5,7 @@ hs/*.hi
 hs/*.o
 .idea/*
 **.iml
+
+.cabal-sandbox/
+cabal.sandbox.config
+dist/

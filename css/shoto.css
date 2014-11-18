@@ -19,6 +19,8 @@ img.flag  {width: 20px; height: 10px;}
 #finnish { position: absolute; bottom: 5px; right: 30px; }
 #english { position: absolute; bottom: 5px; right: 0px; }
 
+.fb-like span { height: 25px !important; }
+
 #content-wrapper {padding: 0;}
 
 .tapahtumakalenteri span { display: inline-block; margin-right: 10px; font-weight: bold; }

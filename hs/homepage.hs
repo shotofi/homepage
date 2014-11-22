@@ -27,7 +27,8 @@ main = hakyllWith config $ do
         leftup <- loadBody "snippets/tapahtumakalenteri.html"
         leftdown <- loadBody "snippets/alkeiskurssi-mainos.html"
         rightup <- loadBody "snippets/harjoitusajat-mainos.html"
-        fiThreeColumn $ fourSnippetCtx leftup leftdown rightup ""
+        rightdown <- loadBody "snippets/twitter-box.html"
+        fiThreeColumn $ fourSnippetCtx leftup leftdown rightup rightdown
 
   forM_ ["pages/harjoittelu.html", "pages/harjoittelupaikat.html", "pages/katat.html", "pages/perustekniikka.html",
          "pages/salietiketti.html", "pages/graduointi.html", "pages/tyylikuvaus.html"] $ \p ->
@@ -82,7 +83,8 @@ main = hakyllWith config $ do
         leftup <- loadBody "snippets/tapahtumakalenteri_en.html"
         leftdown <- loadBody "snippets/alkeiskurssi-mainos_en.html"
         rightup <- loadBody "snippets/harjoitusajat-mainos_en.html"
-        enThreeColumn $ fourSnippetCtx leftup leftdown rightup ""
+        rightdown <- loadBody "snippets/twitter-box_en.html"
+        enThreeColumn $ fourSnippetCtx leftup leftdown rightup rightdown
 
   forM_ ["pages/harjoittelu_en.html", "pages/harjoittelupaikat_en.html", "pages/katat_en.html", "pages/perustekniikka_en.html",
          "pages/salietiketti_en.html", "pages/graduointi_en.html", "pages/tyylikuvaus_en.html"] $ \p ->
